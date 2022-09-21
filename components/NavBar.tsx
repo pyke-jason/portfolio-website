@@ -5,6 +5,7 @@ import {
   AppBar,
   SkipToMainContent,
   Container,
+  Button,
 } from "@components/common";
 import { DarkThemeButton } from "./DarkThemeButton";
 
@@ -12,22 +13,16 @@ export default function NavBar({ }) {
   return (
     <nav>
       <SkipToMainContent />
-      <AppBar size="2" color="loContrast" border sticky glass>
+      <AppBar size="2" color="loContrast" border sticky >
         <Container size="3">
           <Flex justify="between" align="center">
             <Flex gap="4" align="center">
-              <Text>Line by Line Game Studios</Text>
+              <Text>Jason Pyke</Text>
             </Flex>
             <Flex gap="4" align="center">
-              <Link href="/privacy-policy">
-                <Text>Privacy Policy</Text>
-              </Link>
-              <Link href="/jobs">
-                <Text>Jobs</Text>
-              </Link>
-              <Link href="/account">
-                <Text>Account</Text>
-              </Link>
+              <Button href="/contact">
+                <Text>Contact</Text>
+              </Button>
               <DarkThemeButton />
             </Flex>
           </Flex>

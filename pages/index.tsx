@@ -8,9 +8,12 @@ import {
   Section,
   Flex,
   Separator,
+  Image,
+  Avatar,
 } from "@components/common";
 import TitleAndMetaTags from "@components/TitleAndMetaTags";
 import { globalStyles } from "@stitches-config";
+import { KeywordItem } from "@components/index/KeywordItem";
 
 
 export default function Home() {
@@ -19,19 +22,44 @@ export default function Home() {
     <>
       <TitleAndMetaTags />
       <Box>
-        <Header />
+        {/* <Header /> */}
         <main>
-          <Section size="3">
-            <Container size="2">
-              <Heading size="4" css={{ ta: "center", mb: "$3" }}>
-                This is a title.
-              </Heading>
-              <Paragraph size="2" css={{ ta: "center" }}>
-                A subtitle just for you.
-              </Paragraph>
-            </Container>
-          </Section>
-          <Flex css={{ jc: "center" }}>
+          <Box css={{ pt:"200px", backgroundColor: "$indigo2" }}>
+            <Section size="3">
+              <Container size="3">
+                <Flex gap="7" justify={"center"} align={"center"}>
+                  <Box>
+                    <Image css={{ width: "18em" }} src={"/images/headshot-circle.png"}>
+                    </Image>
+                  </Box>
+                  <Box>
+                    <Heading size="4" css={{ mb: "$7" }}>
+                      Jason Pyke
+                    </Heading>
+                    <Paragraph size="2">
+                      Senior at the University of Washington
+                    </Paragraph>
+                  </Box>
+                </Flex>
+              </Container>
+            </Section>
+            <Section size="3">
+              <Container size="3">
+                <Flex gap="7" justify={"center"} align={"center"}>
+                  <Paragraph size="1">
+                    Senior at the University of Washington
+                  </Paragraph>
+                  <Paragraph size="1">
+                    Email: pyke.jason1@gmail.com
+                  </Paragraph>
+                  <Paragraph size="1">
+                    Senior at the University of Washington
+                  </Paragraph>
+                </Flex>
+              </Container>
+            </Section>
+          </Box>
+          <Flex css={{ mt: "$9", jc: "center" }}>
             <Separator size="2" />
           </Flex>
           <Section size="3">
@@ -45,6 +73,23 @@ export default function Home() {
                 nulla pariatur. Excepteur sint occaecat cupidatat non proident,
                 sunt in culpa qui officia deserunt mollit anim id est laborum.
               </Paragraph>
+            </Container>
+          </Section>
+          <Section size="3">
+            <Container size="3">
+              <Heading size="3" css={{ ta: "center", mb: "$3" }}>
+                Projects
+              </Heading>
+              <Flex gap="3" wrap="wrap">
+                <KeywordItem name="Java" priority={1}
+                  description="General-purpose, multi-paradigm programming language."
+                  verified tags={["common"]}
+                  link="https://en.wikipedia.org/wiki/Java_(programming_language)" />
+                <KeywordItem name="Agile Development" priority={2} description="Iterative approach to project management and software development." />
+                <KeywordItem name="Git" priority={2} description="Common version control tool used in larger projects" />
+                <KeywordItem name="Azure" priority={2} description="A large scale cloud service from Microsoft, frequently used in industry" />
+                <KeywordItem name="SQL" priority={2} description="A basic query language used in many relational databases" verified tags={["common"]} />
+              </Flex>
             </Container>
           </Section>
           <Section size="3">

@@ -218,7 +218,10 @@ const StyledAvatarFallback = styled(AvatarPrimitive.Fallback, {
       },
       '6': {
         fontSize: '$9',
-      },
+       },
+      // '7' : {
+      //   fontSize: '';
+      // }
     },
   },
   defaultVariants: {
