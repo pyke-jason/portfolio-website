@@ -1,6 +1,13 @@
 import React from "react";
-import { IoLink, IoLogoGithub } from "react-icons/io5";
-import IconButton from "./IconButton";
+import IconButton from "@components/IconButton";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import {
+    IconLookup,
+    findIconDefinition
+} from '@fortawesome/fontawesome-svg-core'
+
 
 interface SectionEntryData {
     title?: string;
@@ -11,16 +18,26 @@ interface SectionEntryData {
     children?: React.ReactNode
 }
 
+function createIcon(name: IconLookup, url: string) {
+    return <IconButton
+        className="text-slate-800 hover:text-slate-500 fa-layers fa-fw fa-si text-6xl"
+        link={url} >
+        <FontAwesomeIcon icon={findIconDefinition({ prefix: "fas", iconName: "circle" })} />
+        <FontAwesomeIcon icon={findIconDefinition(name)} inverse transform="shrink-7" />
+    </IconButton>
+}
 
 function SectionEntry({ title, subtitle, date, githubUrl, genericLink, children }: SectionEntryData) {
 
     return <>
         <div>
-            {title && <h2>{title}</h2>}
-            {githubUrl && <IconButton link={githubUrl}><IoLogoGithub /></IconButton>}
-            {genericLink && <IconButton link={genericLink}><IoLink /></IconButton>}
+            <div className="flex">
+                {title && <h2 className="flex-1">{title}</h2>}
+                {date && <p className="flex-none">{date}</p>}
+            </div>
+            {githubUrl && createIcon({ prefix: "fab", iconName: "github" }, githubUrl)}
+            {genericLink && createIcon({ prefix: "fas", iconName: "link" }, genericLink)}
             {subtitle && <h3>{subtitle}</h3>}
-            {date && <p>{date}</p>}
             {children}
 
         </div>

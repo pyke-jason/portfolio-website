@@ -1,11 +1,18 @@
+
 interface IconButtonData {
     link: string;
+    className?: string;
     children?: React.ReactNode;
 }
-function IconButton({ link, children }: IconButtonData) {
-    return <a target="_blank" rel="noopener noreferrer" href={link}>
+
+function IconButton({ link, className, children }: IconButtonData) {
+    function onClick() {
+        window.open(link, 'blank');
+    }
+
+    return <button onClick={onClick} type="button" className={className} >
         {children}
-    </a>
+    </button >
 }
 
 export default IconButton;
