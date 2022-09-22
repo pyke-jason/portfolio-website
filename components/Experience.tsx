@@ -1,12 +1,13 @@
+import PageData from "interfaces/PageData";
 import Section from "./Section";
 import SectionEntry from "./SectionEntry";
 import SectionEntryNotes from "./SectionEntryNotes";
 
-export default function Experience() {
+export default function Experience({ id }: PageData) {
     return <>
-        <Section title="Experience">
+        <Section id={id} title="Experience">
             <SectionEntry
-                title="Software Engineer Intern"
+                title="Software Engineer, Intern"
                 subtitle="Booz Allen Hamilton"
                 date="July 2022 - Present"
             >

@@ -1,8 +1,9 @@
+import PageData from "interfaces/PageData";
 import Section from "./Section";
 
-export default function Awards() {
+export default function Awards({ id }: PageData) {
     return <>
-        <Section title="Awards">
+        <Section id={id} title="Awards">
 
         </Section>
     </>

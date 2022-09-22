@@ -6,7 +6,7 @@ interface SectionEntryNotesData {
 function SectionEntryNotes({ notes }: SectionEntryNotesData) {
     return <>
         <ul>
-            {notes && notes.map((x, i) => <li key={i}>{x}</li>)}
+            {notes && notes.map((x, i) => <li className="text-slate-500 list-disc list-inside" key={i}>{x}</li>)}
         </ul>
 
     </>

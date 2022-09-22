@@ -1,3 +1,4 @@
+import PageData from "interfaces/PageData";
 import Section from "./Section";
 
 interface SkillData {
@@ -17,9 +18,9 @@ function SkillEntry({ title, skills: children }: SkillData) {
 
     </>
 }
-export default function Skills() {
+export default function Skills({ id }: PageData) {
     return <>
-        <Section title="Skills">
+        <Section id={id} title="Skills">
             <SkillEntry title={"Proficient Programming Languages"} skills={
                 ["C#", "C", "TypeScript", "JavaScript", "Java", "SQL"]
             } />

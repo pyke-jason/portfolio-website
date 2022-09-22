@@ -20,25 +20,31 @@ interface SectionEntryData {
 
 function createIcon(name: IconLookup, url: string) {
     return <IconButton
-        className="text-slate-800 hover:text-slate-500 fa-layers fa-fw fa-si text-6xl"
+        className="text-slate-800 hover:text-slate-500 fa-layers fa-fw fa-si text-5xl"
         link={url} >
         <FontAwesomeIcon icon={findIconDefinition({ prefix: "fas", iconName: "circle" })} />
-        <FontAwesomeIcon icon={findIconDefinition(name)} inverse transform="shrink-7" />
+        <FontAwesomeIcon icon={findIconDefinition(name)} inverse transform="shrink-8" />
     </IconButton>
 }
 
 function SectionEntry({ title, subtitle, date, githubUrl, genericLink, children }: SectionEntryData) {
 
     return <>
-        <div>
+        <div className="mt-6 mb-12">
             <div className="flex">
-                {title && <h2 className="flex-1">{title}</h2>}
+                {title && <h2 className="flex-1 text-2xl font-medium">{title}</h2>}
                 {date && <p className="flex-none">{date}</p>}
             </div>
-            {githubUrl && createIcon({ prefix: "fab", iconName: "github" }, githubUrl)}
-            {genericLink && createIcon({ prefix: "fas", iconName: "link" }, genericLink)}
-            {subtitle && <h3>{subtitle}</h3>}
-            {children}
+            {subtitle && <h3 className="text-lg uppercase font-light">{subtitle}</h3>}
+            {(githubUrl || genericLink) &&
+                <div className="flex mt-5">
+                    {githubUrl && createIcon({ prefix: "fab", iconName: "github" }, githubUrl)}
+                    {genericLink && createIcon({ prefix: "fas", iconName: "link" }, genericLink)}
+                </div>}
+
+            <div className="max-w-4xl mt-5">
+                {children}
+            </div>
 
         </div>
 

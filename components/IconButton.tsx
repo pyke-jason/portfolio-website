@@ -6,13 +6,10 @@ interface IconButtonData {
 }
 
 function IconButton({ link, className, children }: IconButtonData) {
-    function onClick() {
-        window.open(link, 'blank');
-    }
 
-    return <button onClick={onClick} type="button" className={className} >
+    return <a href={link} className={className} >
         {children}
-    </button >
+    </a >
 }
 
 export default IconButton;

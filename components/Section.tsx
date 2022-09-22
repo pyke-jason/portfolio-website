@@ -1,14 +1,18 @@
-interface SectionData {
+import PageData from "interfaces/PageData";
+
+interface SectionData extends PageData {
     title: string;
     children?: React.ReactNode;
 }
 
-function Section({ title, children }: SectionData) {
+function Section({ title, children, id }: SectionData) {
     return <>
-        <div className="p-9 border-b">
-            {<h1 className="text-3xl font-bold uppercase">{title}</h1>}
-            {children}
-        </div>
+        <section id={id}className="p-12 border-b">
+            <div className="max-w-7xl">
+                {<h1 className="text-3xl font-bold uppercase">{title}</h1>}
+                {children}
+            </div>
+        </section>
     </>
 }
 

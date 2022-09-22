@@ -1,10 +1,11 @@
+import PageData from "interfaces/PageData";
 import Section from "./Section";
 import SectionEntry from "./SectionEntry";
 import SectionEntryNotes from "./SectionEntryNotes";
 
-export default function Projects() {
+export default function Projects({ id }: PageData) {
     return <>
-        <Section title="Projects">
+        <Section id={id} title="Projects">
             <SectionEntry
                 title="Coalition - Multiplayer FPS"
                 subtitle="Mobile Game"
@@ -33,6 +34,7 @@ export default function Projects() {
                 title="Resume Quest"
                 subtitle="Informatics Capstone Project"
                 genericLink="https://resumequest.careers"
+                githubUrl="https://github.com/Pomegranate-Coding-Group/CritiqueAI"
                 date="December 2016 - Present"
             >
                 <SectionEntryNotes
