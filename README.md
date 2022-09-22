@@ -1,1 +1,3 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+# Portfolio Website
+
+My portfolio website, created with TypeScript using Next.js and Tailwindcss. 
