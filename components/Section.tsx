@@ -7,7 +7,7 @@ interface SectionData extends PageData {
 
 function Section({ title, children, id }: SectionData) {
     return <>
-        <section id={id}className="p-12 border-b">
+        <section id={id}className="p-8 md:p-12 border-b">
             <div className="max-w-7xl">
                 {<h1 className="text-3xl font-bold uppercase">{title}</h1>}
                 {children}

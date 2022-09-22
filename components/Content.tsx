@@ -1,7 +1,7 @@
-import PageData from "interfaces/PageData";
+import { PageDictionary } from "interfaces/PageDictionary";
 
-interface ContentData {
-    pages: { title: string, url: string, component: ({ id }: PageData) => JSX.Element }[];
+interface ContentData extends PageDictionary {
+
     className?: string;
 }
 

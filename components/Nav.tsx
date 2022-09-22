@@ -8,11 +8,18 @@ import {
 } from '@fortawesome/fontawesome-svg-core'
 import { PageDictionary } from "interfaces/PageDictionary";
 
+interface MenuItemData {
+  title: string;
+  url: string;
+  key: React.Key;
+}
+
 function Nav({ pages }: PageDictionary) {
   const [isOpen, setIsOpen] = useState(false);
 
-  function MenuItem({ title, url }: any) {
+  function MenuItem({ title, url, key }: MenuItemData) {
     return <a
+      key={key}
       href={url}
       className="text-gray-300 hover:text-white py-2 text-lg uppercase font-medium"
     >
@@ -20,8 +27,9 @@ function Nav({ pages }: PageDictionary) {
     </a>
   }
 
-  function SmallMenuItem({ title, url }: any) {
+  function SmallMenuItem({ title, url, key }: MenuItemData) {
     return <a
+      key={key}
       href={"#" + url}
       className="text-gray-300 hover:text-white block px-10 py-2 text-base font-medium"
     >
@@ -34,9 +42,9 @@ function Nav({ pages }: PageDictionary) {
       <aside className="py-3 bg-blue-400 md:sticky md:top-0 md:w-72 md:h-screen flex flex-col">
         <div className="my-auto px-10">
           <div className="flex items-center justify-between md:justify-center">
-            <div className="hidden md:block mb-3">
+            <a href={"#" + pages[0].url} className="hidden md:block mb-3">
               <Image src="/images/headshot-circle.png" width="170px" height="170px" />
-            </div>
+            </a>
             <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white md:hidden block py-2 text-base font-medium">
               {pages[0].title}
             </a>
@@ -59,7 +67,7 @@ function Nav({ pages }: PageDictionary) {
           </div>
           <div className="hidden md:block">
             <div className="flex items-center flex-col flex-cent">
-              {pages.map((x) => <MenuItem title={x.title} url={"#" + x.url} />)}
+              {pages.map((x, i) => i != 0 && <MenuItem key={i} title={x.title} url={"#" + x.url} />)}
             </div>
           </div>
         </div>
@@ -75,7 +83,7 @@ function Nav({ pages }: PageDictionary) {
           {(ref) => (
             <div id="mobile-menu md:hidden">
               <div ref={ref} className="pt-2 pb-3 space-y-1">
-                {pages.map((x) => <SmallMenuItem title={x.title} url={"#" + x.url} />)}
+                {pages.map((x, i) => i != 0 && <SmallMenuItem key={i} title={x.title} url={"#" + x.url} />)}
               </div>
             </div>
           )}

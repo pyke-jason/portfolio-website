@@ -1,7 +1,7 @@
 import Content from "@components/Content";
 import Nav from "@components/Nav";
 import Title from "@components/Title";
-import Awards from "@components/Awards";
+import Achievements from "@components/Achievements";
 import Education from "@components/Education";
 import Experience from "@components/Experience";
 import Projects from "@components/Projects";
@@ -14,7 +14,7 @@ export default function Home() {
     { title: "Education", url: "education", "component": Experience },
     { title: "Projects", url: "projects", "component": Projects },
     { title: "Skills", url: "skills", "component": Skills },
-    { title: "Awards", url: "awards", "component": Awards },
+    { title: "Awards", url: "awards", "component": Achievements },
   ];
   return <>
     {<div className="md:flex">
