@@ -6,7 +6,7 @@ function Title({ id: url }: PageData) {
         <div id={url} className="p-12 border-b md:h-screen flex flex-col">
             <div className="my-auto text-center md:text-left">
                 <div className="md:hidden mb-3">
-                    <Image src="/images/headshot-circle.png" width="400px" height="400px" />
+                    <Image src="/images/headshot-circle.png" width="220px" height="220px" />
                 </div>
                 <h1 className="text-5xl md:text-7xl font-bold uppercase">Jason Pyke</h1>
                 <h2 className="text-2xl mb-5">Software Engineer</h2>

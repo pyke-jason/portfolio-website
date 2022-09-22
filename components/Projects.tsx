@@ -10,6 +10,8 @@ export default function Projects({ id }: PageData) {
                 title="Coalition - Multiplayer FPS"
                 subtitle="Mobile Game"
                 date="July 2014 - June 2021"
+                googlePlay="https://play.google.com/store/apps/details?id=com.sideeffect.coalition"
+                genericLink="http://linebylinestudios.com/"
             >
                 <SectionEntryNotes
                     notes={[
@@ -22,6 +24,8 @@ export default function Projects({ id }: PageData) {
                 title="Rampage Road"
                 subtitle="Mobile Game"
                 date="December 2016 - Present"
+                googlePlay="https://play.google.com/store/apps/details?id=com.linebyline.rampageroad"
+                genericLink="http://linebylinestudios.com/"
             >
                 <SectionEntryNotes
                     notes={[
@@ -46,7 +50,7 @@ export default function Projects({ id }: PageData) {
             </SectionEntry>
             <SectionEntry
                 title="Flights Database Design & Implementation"
-                subtitle="Mobile Game"
+                subtitle="Informatics School Project"
                 githubUrl="https://github.com/pyke-jason/sql-flights"
                 date="December 2016 - Present"
             >

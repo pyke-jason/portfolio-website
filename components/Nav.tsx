@@ -7,6 +7,7 @@ import {
   findIconDefinition
 } from '@fortawesome/fontawesome-svg-core'
 import { PageDictionary } from "interfaces/PageDictionary";
+import Link from "next/link";
 
 interface MenuItemData {
   title: string;
@@ -18,23 +19,24 @@ function Nav({ pages }: PageDictionary) {
   const [isOpen, setIsOpen] = useState(false);
 
   function MenuItem({ title, url, key }: MenuItemData) {
-    return <a
-      key={key}
-      href={url}
-      className="text-gray-300 hover:text-white py-2 text-lg uppercase font-medium"
-    >
-      {title}
-    </a>
+    return <Link key={key}
+      href={url}>
+      <a
+        className="text-gray-300 hover:text-white py-2 text-lg uppercase font-medium"
+      >
+        {title}
+      </a>
+    </Link>
   }
 
   function SmallMenuItem({ title, url, key }: MenuItemData) {
-    return <a
-      key={key}
-      href={"#" + url}
-      className="text-gray-300 hover:text-white block px-10 py-2 text-base font-medium"
-    >
-      {title}
-    </a>
+    return <Link key={key} href={url}>
+      <a
+        className="text-gray-300 hover:text-white block px-10 py-2 text-base font-medium"
+      >
+        {title}
+      </a>
+    </Link>
   }
 
   return (
@@ -45,14 +47,14 @@ function Nav({ pages }: PageDictionary) {
             <a href={"#" + pages[0].url} className="hidden md:block mb-3">
               <Image src="/images/headshot-circle.png" width="170px" height="170px" />
             </a>
-            <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white md:hidden block py-2 text-base font-medium">
+            <a href={"#" + pages[0].url} className="text-gray-300 hover:text-white md:hidden block py-2 text-base font-medium">
               {pages[0].title}
             </a>
             <div className="flex md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:bg-white"
+                className="inline-flex text-gray-300 hover:text-white"
                 aria-controls="mobile-menu"
                 aria-expanded="false"
               >
@@ -60,7 +62,7 @@ function Nav({ pages }: PageDictionary) {
                 {!isOpen ? (
                   <FontAwesomeIcon size={"xl"} icon={findIconDefinition({ prefix: "fas", iconName: "bars" })} />
                 ) : (
-                  <FontAwesomeIcon size={"xl"} icon={findIconDefinition({ prefix: "fas", iconName: "bars" })} />
+                  <FontAwesomeIcon size={"xl"} icon={findIconDefinition({ prefix: "fas", iconName: "xmark" })} />
                 )}
               </button>
             </div>
