@@ -14,7 +14,7 @@ export default function Home() {
     { title: "Education", url: "education", "component": Experience },
     { title: "Projects", url: "projects", "component": Projects },
     { title: "Skills", url: "skills", "component": Skills },
-    { title: "Awards", url: "awards", "component": Achievements },
+    { title: "Achievements", url: "awards", "component": Achievements },
   ];
   return <>
     {<div className="md:flex">
