@@ -83,7 +83,7 @@ function Nav({ pages }: PageDictionary) {
           leaveTo="opacity-0 scale-95"
         >
           {(ref) => (
-            <div id="mobile-menu md:hidden">
+            <div id="mobile-menu" className="md:hidden">
               <div ref={ref} className="pt-2 pb-3 space-y-1">
                 {pages.map((x, i) => i != 0 && <SmallMenuItem key={i} title={x.title} url={"#" + x.url} />)}
               </div>
