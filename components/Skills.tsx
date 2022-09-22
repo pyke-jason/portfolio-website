@@ -9,11 +9,9 @@ interface SkillData {
 function SkillEntry({ title, skills: children }: SkillData) {
 
     return <>
-        <div>
-            <h2>{title}</h2>
-            <ul>
-                {children && children.map((v, i) => <li key={i}>{v}</li>)}
-            </ul>
+        <div className="flex flex-wrap space-x-4">
+            <h2 className="text-lg font-medium">{title}</h2>
+            {children && children.map((v, i) => <p key={i}>{v}</p>)}
         </div>
 
     </>
@@ -21,10 +19,10 @@ function SkillEntry({ title, skills: children }: SkillData) {
 export default function Skills({ id }: PageData) {
     return <>
         <Section id={id} title="Skills">
-            <SkillEntry title={"Proficient Programming Languages"} skills={
-                ["C#", "C", "TypeScript", "JavaScript", "Java", "SQL"]
+            <SkillEntry title={"Proficient Programming Languages:"} skills={
+                ["C#", "C", "Python", "TypeScript", "JavaScript", "Java", "SQL"]
             } />
-            <SkillEntry title={"Familiar Programming Languages"} skills={
+            <SkillEntry title={"Familiar Programming Languages:"} skills={
                 ["C++", "HTML/CSS", "GO", "Dart", "R"]
             } />
         </Section>
