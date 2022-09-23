@@ -7,19 +7,20 @@ import {
 } from '@fortawesome/fontawesome-svg-core'
 import Link from "next/link";
 
-interface IconButtonData {
+interface IconLinkData {
     href: string;
     name: IconLookup;
+    noHighlight?: boolean;
     className?: string;
     children?: React.ReactNode;
     circular?: boolean;
 }
 
-export default function IconButton({ name, href, className, circular, children }: IconButtonData) {
+export default function IconLink({ name, href, className, noHighlight: disableHighlight, circular, children }: IconLinkData) {
     return <Link href={href} >
-        <a target="_blank" rel="noopener noreferrer" className={className}>
-            <span className={"text-slate-800 hover:text-slate-500 fa-layers fa-fw fa-si"}>
-                {circular && <FontAwesomeIcon icon={findIconDefinition({ prefix: "fas", iconName: "circle" })} />}
+        <a target="_blank" rel="noopener noreferrer" className={`transition-transform hover:scale-105 ${className}`}>
+            <span className={`${!disableHighlight && "text-stone-900"} fa-layers fa-fw fa-si`}>
+                {circular && <FontAwesomeIcon className='font-medium' icon={findIconDefinition({ prefix: "fas", iconName: "circle" })} />}
                 {circular && <FontAwesomeIcon icon={findIconDefinition(name)} inverse transform="shrink-8" />}
                 {!circular && <FontAwesomeIcon icon={findIconDefinition(name)} />}
             </span>

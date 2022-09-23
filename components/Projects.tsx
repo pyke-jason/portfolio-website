@@ -1,19 +1,19 @@
 import PageData from "interfaces/PageData";
 import Section from "./Section";
 import SectionEntry from "./SectionEntry";
-import SectionEntryNotes from "./SectionEntryNotes";
+import BulletedNotes from "./BulletedNotes";
 
-export default function Projects({ id }: PageData) {
+export default function Projects({ id, onBecameActive }: PageData) {
     return <>
-        <Section id={id} title="Projects">
+        <Section onBecameActive={onBecameActive} id={id} title="Projects">
             <SectionEntry
-                title="Coalition - Multiplayer FPS"
+                title="Coalition &ndash; Multiplayer FPS"
                 subtitle="Mobile Game"
-                date="July 2014 - June 2021"
+                date="July 2014 &ndash; June 2021"
                 googlePlay="https://play.google.com/store/apps/details?id=com.sideeffect.coalition"
                 genericLink="http://linebylinestudios.com/"
             >
-                <SectionEntryNotes
+                <BulletedNotes
                     notes={[
                         "Created a real-time multiplayer video game using a client authoritative model with over 4 million downloads",
                         "Created REST API for dynamic content delivery to clients",
@@ -23,11 +23,11 @@ export default function Projects({ id }: PageData) {
             <SectionEntry
                 title="Rampage Road"
                 subtitle="Mobile Game"
-                date="December 2016 - Present"
+                date="December 2016 &ndash; Present"
                 googlePlay="https://play.google.com/store/apps/details?id=com.linebyline.rampageroad"
                 genericLink="http://linebylinestudios.com/"
             >
-                <SectionEntryNotes
+                <BulletedNotes
                     notes={[
                         "Designed and implemented a revenue generating open-world Android game with over 7 million downloads",
                         "Implemented efficient multithreaded A* pathfinding algorithm using Unity C# Jobs System",
@@ -39,9 +39,9 @@ export default function Projects({ id }: PageData) {
                 subtitle="Informatics Capstone Project"
                 genericLink="https://resumequest.careers"
                 githubUrl="https://github.com/Pomegranate-Coding-Group/CritiqueAI"
-                date="December 2016 - Present"
+                date="December 2016 &ndash; Present"
             >
-                <SectionEntryNotes
+                <BulletedNotes
                     notes={[
                         "Developed an interactive resume tailoring tool using TypeScript for screening job listings",
                         "Established REST API for storing and fetching results, incorporated document-based persistent storage ",
@@ -52,9 +52,9 @@ export default function Projects({ id }: PageData) {
                 title="Flights Database Design & Implementation"
                 subtitle="Informatics School Project"
                 githubUrl="https://github.com/pyke-jason/sql-flights"
-                date="December 2016 - Present"
+                date="December 2016 &ndash; Present"
             >
-                <SectionEntryNotes
+                <BulletedNotes
                     notes={[
                         "Developed and populated a database for an airline's flights database using stored and insert procedures, business rules, synthetic transactions, and complex queries ",
                         "Utilized: SQL, MS SQL Server 2019"
