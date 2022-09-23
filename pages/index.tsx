@@ -14,6 +14,9 @@ export default function Home() {
   function onBecameActive(id: string) {
     setActiveSection(id);
   }
+  function selectActive(id: string){
+    setActiveSection(id);
+  }
 
   const pages = [
     { title: "Jason Pyke", id: "about", "component": Title },
@@ -26,7 +29,7 @@ export default function Home() {
   return <>
     {<div className="md:flex">
       {/* <NavBar className="md:flex-none w-80" /> */}
-      <Nav pages={pages} activeSection={activeSection} setActive={onBecameActive} />
+      <Nav pages={pages} activeSection={activeSection} selectActive={selectActive} />
       <Content pages={pages} className="md:flex-grow" onBecameActive={onBecameActive} />
     </div>}
 

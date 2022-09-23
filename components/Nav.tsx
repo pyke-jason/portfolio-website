@@ -14,12 +14,12 @@ interface MenuItemData {
   id: string;
   className?: string;
   active?: boolean;
-  setActive?: (id: string) => void;
+  selectActive?: (id: string) => void;
 }
-function MenuItem({ title, id, className, setActive, active }: MenuItemData) {
+function MenuItem({ title, id, className, selectActive, active }: MenuItemData) {
   return <div className={className}>
-    <button onClick={() => { setActive && setActive(id); }}
-      className={`${active && "border-slate-900 border-b-2 scale-105"} text-stone-800 hover:border-b-2 transition-all focus:scale-105 focus:border-slate-900 hover:border-slate-300 pb-1 text-lg`}
+    <button onClick={() => { selectActive && selectActive(id); }}
+      className={`${active && "border-slate-900 scale-105"} text-stone-800 border-b-2 border-white transition-all focus:scale-105 focus:border-slate-900 hover:border-slate-300 pb-1 text-lg`}
     >
       {title}
     </button>
@@ -38,10 +38,10 @@ function SmallMenuItem({ title, id, className, active }: MenuItemData) {
 
 interface NavData extends PageDictionary {
   activeSection?: string;
-  setActive: (id: string) => void;
+  selectActive: (id: string) => void;
 }
 
-function Nav({ pages, activeSection, setActive }: NavData) {
+function Nav({ pages, activeSection, selectActive: setActive }: NavData) {
   const [isOpen, setIsOpen] = useState(false);
 
 
@@ -50,9 +50,9 @@ function Nav({ pages, activeSection, setActive }: NavData) {
       <aside className="py-3 md:sticky md:top-0 md:border-r md:w-72 md:h-screen flex flex-col">
         <div className="my-auto">
           <div className="flex items-center justify-between md:justify-center">
-            <a href={"#" + pages[0].id} className="w-40 h-40 rounded-full hidden md:block mb-3 border-slate-300 focus:border-slate-900 hover:border">
+            <button onClick={() => setActive(pages[0].id)} className="w-40 h-40 rounded-full hidden md:block mb-3 border-white hover:border-slate-900 border">
               <Image src="/images/headshot-circle.png" width="160px" height="160px" />
-            </a>
+            </button>
             <SmallMenuItem className="md:hidden" id={activeSection} title={activeSection} />
             <div className="flex md:hidden mr-6">
               <button
@@ -73,7 +73,7 @@ function Nav({ pages, activeSection, setActive }: NavData) {
           </div>
           <div className="hidden md:block">
             <div className="text-center space-y-4">
-              {pages.map((x, i) => i != 0 && <MenuItem key={i} active={activeSection === x.id} title={x.title} id={"#" + x.id} setActive={setActive} />)}
+              {pages.map((x, i) => i != 0 && <MenuItem key={i} active={activeSection === x.id} title={x.title} id={x.id} selectActive={setActive} />)}
             </div>
           </div>
         </div>
@@ -89,7 +89,7 @@ function Nav({ pages, activeSection, setActive }: NavData) {
           {(ref) => (
             <div id="mobile-menu" className="md:hidden">
               <div ref={ref} className="pt-2 pb-3 space-y-1">
-                {pages.map((x, i) => i != 0 && <SmallMenuItem active={activeSection === x.id} key={i} title={x.title} id={x.id} setActive={setActive} />)}
+                {pages.map((x, i) => i != 0 && <SmallMenuItem active={activeSection === x.id} key={i} title={x.title} id={x.id} selectActive={setActive} />)}
               </div>
             </div>
           )}
