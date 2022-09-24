@@ -1,11 +1,11 @@
 import PageData from "interfaces/PageData";
-import Section from "./Section";
 import SectionEntry from "./SectionEntry";
 import BulletedNotes from "./BulletedNotes";
+import TitledSection from "./TitledSection";
 
 export default function Experience({ id, onBecameActive }: PageData) {
     return <>
-        <Section onBecameActive={onBecameActive} id={id} title="Experience">
+        <TitledSection onBecameActive={onBecameActive} id={id} title="Experience">
             <SectionEntry
                 title="Software Engineer, Intern"
                 subtitle="Booz Allen Hamilton"
@@ -31,6 +31,6 @@ export default function Experience({ id, onBecameActive }: PageData) {
                         "Leveraged knowledge in Mobile Application Development and Computer Vision, programmed using Python and Dart, and debugged using Visual Studio Code"
                     ]} />
             </SectionEntry>
-        </Section>
+        </TitledSection>
     </>
 }

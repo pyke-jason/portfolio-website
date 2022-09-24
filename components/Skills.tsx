@@ -1,5 +1,5 @@
 import PageData from "interfaces/PageData";
-import Section from "./Section";
+import TitledSection from "./TitledSection";
 
 interface SkillData {
     title: string;
@@ -20,7 +20,7 @@ function SkillEntry({ title, skills: children }: SkillData) {
 }
 export default function Skills({ id, onBecameActive }: PageData) {
     return <>
-        <Section onBecameActive={onBecameActive} id={id} title="Skills">
+        <TitledSection onBecameActive={onBecameActive} id={id} title="Skills">
             <div>
                 <SkillEntry title={"Programming Languages (proficient)"} skills={
                     ["C#", "Python", "C", "TypeScript", "JavaScript", "Java", "SQL"]
@@ -50,6 +50,6 @@ export default function Skills({ id, onBecameActive }: PageData) {
                         "Blender"]
                 } />
             </div>
-        </Section>
+        </TitledSection>
     </>
 }

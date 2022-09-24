@@ -1,11 +1,11 @@
 import PageData from "interfaces/PageData";
-import Section from "./Section";
+import TitledSection from "./TitledSection";
 import SectionEntry from "./SectionEntry";
 import BulletedNotes from "./BulletedNotes";
 
 export default function Projects({ id, onBecameActive }: PageData) {
     return <>
-        <Section onBecameActive={onBecameActive} id={id} title="Projects">
+        <TitledSection onBecameActive={onBecameActive} id={id} title="Projects">
             <SectionEntry
                 title="Coalition &ndash; Multiplayer FPS"
                 subtitle="Mobile Game"
@@ -60,6 +60,6 @@ export default function Projects({ id, onBecameActive }: PageData) {
                         "Utilized: SQL, MS SQL Server 2019"
                     ]} />
             </SectionEntry>
-        </Section>
+        </TitledSection>
     </>
 }

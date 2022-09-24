@@ -1,102 +1,92 @@
 import React, { useEffect, useState } from "react";
-import { Transition } from "@headlessui/react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Listbox, Transition } from "@headlessui/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import {
-  IconLookup,
-  findIconDefinition
-} from '@fortawesome/fontawesome-svg-core'
+import { IconLookup, findIconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { PageDictionary } from "interfaces/PageDictionary";
-import Link from "next/link";
 
 interface MenuItemData {
-  title: string;
-  id: string;
-  className?: string;
-  active?: boolean;
-  selectActive?: (id: string) => void;
+	title: string;
+	id: string;
+	className?: string;
+	active?: boolean;
+	selectActive?: (id: string) => void;
 }
 function MenuItem({ title, id, className, selectActive, active }: MenuItemData) {
-  return <div className={className}>
-    <button onClick={() => { selectActive && selectActive(id); }}
-      className={`${active && "border-slate-900 scale-105"} text-stone-800 border-b-2 border-white transition-all focus:scale-105 focus:border-slate-900 hover:border-slate-300 pb-1 text-lg`}
-    >
-      {title}
-    </button>
-  </div>
+	return (
+		<li className={className}>
+			<button
+				onClick={() => {
+					selectActive && selectActive(id);
+				}}
+				className={`${
+					active ? "border-stone-300 scale-105" : "border-white"
+				} text-stone-800 border-b-2 transition-all hover:border-stone-300 pb-1 text-lg`}
+			>
+				{title}
+			</button>
+		</li>
+	);
 }
 
-function SmallMenuItem({ title, id, className, active }: MenuItemData) {
-  return <div className={className}>
-    <button
-      className={`${active && "text-stone-800 scale-105"} text-blue-500 hover:text-stone-600 block px-10 py-2 text-base font-medium`}
-    >
-      {title}
-    </button>
-  </div>
+function SmallMenuItem({ title, id, className, active, selectActive }: MenuItemData) {
+	return (
+		<div className={className}>
+			<button
+				onClick={() => {
+					selectActive && selectActive(id);
+				}}
+				className={`${
+					active ? "text-stone-800 scale-105 bg-stone-100" : "text-blue-500"
+				} text-left hover:bg-stone-300 block px-10 text-base font-medium`}
+			>
+				{title}
+			</button>
+		</div>
+	);
 }
 
 interface NavData extends PageDictionary {
-  activeSection?: string;
-  selectActive: (id: string) => void;
+	activeSection?: any;
+	selectActive: (id: string) => void;
 }
 
-function Nav({ pages, activeSection, selectActive: setActive }: NavData) {
-  const [isOpen, setIsOpen] = useState(false);
+function Nav({ pages, activeSection, selectActive }: NavData) {
+	const [isOpen, setIsOpen] = useState(false);
+  const [selectedSection, setSelectedSection] = useState({id: })
+	return (
+		<nav className="bg-white sticky md:fixed z-50 top-0 md:w-72 md:h-screen md:border-r md:flex text-center justify-center items-center">
+			<Listbox value={selectedPerson} onChange={setSelectedPerson}>
+				<Listbox.Button>{selectedPerson.name}</Listbox.Button>
+				<Listbox.Options>
+					{people.map((person) => (
+						<Listbox.Option key={person.id} value={person} disabled={person.unavailable}>
+							{person.name}
+						</Listbox.Option>
+					))}
+				</Listbox.Options>
+			</Listbox>
 
-
-  return (
-    <div>
-      <aside className="py-3 md:sticky md:top-0 md:border-r md:w-72 md:h-screen flex flex-col">
-        <div className="my-auto">
-          <div className="flex items-center justify-between md:justify-center">
-            <button onClick={() => setActive(pages[0].id)} className="w-40 h-40 rounded-full hidden md:block mb-3 border-white hover:border-slate-900 border">
-              <Image src="/images/headshot-circle.png" width="160px" height="160px" />
-            </button>
-            <SmallMenuItem className="md:hidden" id={activeSection} title={activeSection} />
-            <div className="flex md:hidden mr-6">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                type="button"
-                className="inline-flex text-gray-300 hover:text-white"
-                aria-controls="mobile-menu"
-                aria-expanded="false"
-              >
-                <span className="sr-only">Open main menu</span>
-                {!isOpen ? (
-                  <FontAwesomeIcon size={"xl"} icon={findIconDefinition({ prefix: "fas", iconName: "bars" })} />
-                ) : (
-                  <FontAwesomeIcon size={"xl"} icon={findIconDefinition({ prefix: "fas", iconName: "xmark" })} />
-                )}
-              </button>
-            </div>
-          </div>
-          <div className="hidden md:block">
-            <div className="text-center space-y-4">
-              {pages.map((x, i) => i != 0 && <MenuItem key={i} active={activeSection === x.id} title={x.title} id={x.id} selectActive={setActive} />)}
-            </div>
-          </div>
-        </div>
-        <Transition
-          show={isOpen}
-          enter="transition ease-out duration-100 transform"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="transition ease-in duration-75 transform"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
-          {(ref) => (
-            <div id="mobile-menu" className="md:hidden">
-              <div ref={ref} className="pt-2 pb-3 space-y-1">
-                {pages.map((x, i) => i != 0 && <SmallMenuItem active={activeSection === x.id} key={i} title={x.title} id={x.id} selectActive={setActive} />)}
-              </div>
-            </div>
-          )}
-        </Transition>
-      </aside>
-    </div>
-  );
+			<div className="hidden md:block">
+				<button
+					onClick={() => selectActive(pages[0].id)}
+					className={`${
+						activeSection == pages[0].id ? "border-stone-300 border" : "border-white"
+					} w-40 h-40 rounded-full hidden md:block mb-3 hover:border-stone-300 border-2`}
+				>
+					<Image src="/images/headshot-circle.png" width="160px" height="160px" />
+				</button>
+				<ul className="space-y-2">
+					{pages.map(
+						(x, i) =>
+							i != 0 && (
+								<MenuItem key={i} active={activeSection === x.id} title={x.title} id={x.id} selectActive={selectActive} />
+							)
+					)}
+				</ul>
+			</div>
+		</nav>
+	);
 }
 
 export default Nav;
