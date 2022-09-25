@@ -12,7 +12,7 @@ export default function Experience({ data, onBecameActive }: PageProps) {
                 date="July 2022 &ndash; Present"
             >
                 <BulletedNotes
-                    notes={["●	Created and validated a patent-pending automated image screening algorithm for arthritis with 95.5% accuracy to a technician assisted method using OpenCV and Human Pose Estimation",
+                    notes={["Created and validated a patent-pending automated image screening algorithm for arthritis with 95.5% accuracy to a technician assisted method using OpenCV and Human Pose Estimation",
                         "Improved framerate on HoloLens by 63% through computation offloading and algorithm optimization as well as implementing an object pooling system and reducing memory allocations",
                         "Reduced network traffic by 37% by implementing allocation-free message encoding/decoding",
                         "Leveraged knowledge in client/server architecture, UDP/TCP and Transport Layer Security, programmed in C# using Visual Studio, and debugged using Visual Studio, Unity Profiler, and HoloLens debug interface"
