@@ -1,5 +1,6 @@
-import PageData from "./PageData";
+import React from "react";
+import PageProps from "./PageProps";
 
 export interface PageDictionary {
-    pages: { title: string, url: string, component: ({ id }: PageData) => JSX.Element }[];
+    pages: { title: string, id: string, component: ({ data }: PageProps) => JSX.Element }[];
 }

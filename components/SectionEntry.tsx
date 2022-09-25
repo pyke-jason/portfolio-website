@@ -1,6 +1,6 @@
 import React from "react";
 
-import IconButton from "./IconButton";
+import IconLink from "./IconLink";
 
 
 interface SectionEntryData {
@@ -10,30 +10,29 @@ interface SectionEntryData {
     githubUrl?: string;
     genericLink?: string;
     googlePlay?: string;
-    children?: React.ReactNode
+    children?: React.ReactNode;
+    className?: string;
 }
 
 
-function SectionEntry({ title, subtitle, date, githubUrl, genericLink, googlePlay, children }: SectionEntryData) {
+function SectionEntry({ title, subtitle, date, githubUrl, genericLink, googlePlay, children, className }: SectionEntryData) {
 
     return <>
-        <div className="mt-6 mb-12">
+        <div>
+            {title && <h2 className="text-2xl text-stone-800 font-bold">{title}</h2>}
             <div className="flex flex-col md:flex-row">
-                <div className="flex-1">
-                    {title && <h2 className="text-2xl font-bold">{title}</h2>}
-                    {subtitle && <h3 className="text-lg font-medium">{subtitle}</h3>}
-                </div>
+                {subtitle && <h3 className="flex-1 text-lg font-medium text-stone-500">{subtitle}</h3>}
                 {date && <p className="flex-none">{date}</p>}
             </div>
             {(githubUrl || genericLink) &&
                 <div className="flex mt-5">
-                    {googlePlay && <IconButton circular className="text-5xl" name={{ prefix: "fab", iconName: "google-play" }} href={googlePlay} />}
-                    {githubUrl && <IconButton circular className="text-5xl" name={{ prefix: "fab", iconName: "github" }} href={githubUrl} />}
-                    {genericLink && <IconButton circular className="text-5xl" name={{ prefix: "fas", iconName: "link" }} href={genericLink} />}
+                    {googlePlay && <IconLink circular className="text-5xl" name={{ prefix: "fab", iconName: "google-play" }} href={googlePlay} />}
+                    {githubUrl && <IconLink circular className="text-5xl" name={{ prefix: "fab", iconName: "github" }} href={githubUrl} />}
+                    {genericLink && <IconLink circular className="text-5xl" name={{ prefix: "fas", iconName: "link" }} href={genericLink} />}
                 </div>}
 
-            <div className="max-w-4xl mt-5">
-                {children}
+            <div className="max-w-3xl mt-5">
+                <div className={className}>{children}</div>
             </div>
 
         </div>

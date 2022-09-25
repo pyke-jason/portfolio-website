@@ -1,19 +1,33 @@
-import PageData from "interfaces/PageData";
+import PageProps from "interfaces/PageProps";
+import { useEffect, useRef } from "react";
 
-interface SectionData extends PageData {
-    title: string;
-    children?: React.ReactNode;
+export interface SectionData extends PageProps {
+	children?: React.ReactNode;
 }
 
-function Section({ title, children, id }: SectionData) {
-    return <>
-        <section id={id}className="p-8 md:p-12 border-b">
-            <div className="max-w-3xl">
-                {<h1 className="text-3xl text-slate-700 font-medium uppercase">{title}</h1>}
-                {children}
-            </div>
-        </section>
-    </>
+function Section({ children, className, data, onBecameActive }: SectionData) {
+	const ref = useRef(null);
+	useEffect(() => {
+		window.addEventListener("scroll", handleScroll);
+	}, []);
+
+	function handleScroll() {
+		if(ref === null || ref.current === null) return;
+		const { offsetTop, offsetHeight } = ref.current;
+		const offsetBottom = offsetTop + offsetHeight;
+		const scrollMid = window.scrollY + window.innerHeight / 2;
+		if (scrollMid >= offsetTop && scrollMid <= offsetBottom) {
+			onBecameActive(data);
+		}
+	}
+
+	return (
+		<>
+			<section id={data.id} ref={ref}>
+				<div className={`${className} space-y-12`}>{children}</div>
+			</section>
+		</>
+	);
 }
 
 export default Section;

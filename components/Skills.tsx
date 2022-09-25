@@ -1,5 +1,5 @@
-import PageData from "interfaces/PageData";
-import Section from "./Section";
+import PageProps from "interfaces/PageProps";
+import TitledSection from "./TitledSection";
 
 interface SkillData {
     title: string;
@@ -9,22 +9,47 @@ interface SkillData {
 function SkillEntry({ title, skills: children }: SkillData) {
 
     return <>
-        <div className="flex flex-wrap space-x-4">
+        <div className="space-y-5 mb-5">
             <h2 className="text-lg font-medium">{title}</h2>
-            {children && children.map((v, i) => <p key={i}>{v}</p>)}
+            <div className="flex flex-wrap space-x-4">
+                {children && children.map((v, i) => <p key={i}>{v}</p>)}
+            </div>
         </div>
 
     </>
 }
-export default function Skills({ id }: PageData) {
+export default function Skills({ data, onBecameActive }: PageProps) {
     return <>
-        <Section id={id} title="Skills">
-            <SkillEntry title={"Proficient Programming Languages:"} skills={
-                ["C#", "C", "Python", "TypeScript", "JavaScript", "Java", "SQL"]
-            } />
-            <SkillEntry title={"Familiar Programming Languages:"} skills={
-                ["C++", "HTML/CSS", "GO", "Dart", "R"]
-            } />
-        </Section>
+        <TitledSection onBecameActive={onBecameActive} data={data} title="Skills">
+            <div>
+                <SkillEntry title={"Programming Languages (proficient)"} skills={
+                    ["C#", "Python", "C", "TypeScript", "JavaScript", "Java", "SQL"]
+                } />
+                <SkillEntry title={"Programming Languages (familiar)"} skills={
+                    ["C++", "HTML/CSS", "GO", "Dart", "R"]
+                } />
+                <SkillEntry title={"Frameworks & Libraries"} skills={
+                    [".NET Core", ".NET Framework", "Next.js", "React.js", "OpenCV (python)", "numpy"]
+                } />
+                <SkillEntry title={"Databases"} skills={
+                    ["Microsoft SQL Server", "SQLite", "MongoDB"]
+                } />
+                <SkillEntry title={"Tools"} skills={
+                    ["Docker",
+                        "Git",
+                        "Git LFS",
+                        "Visual Studio",
+                        "Visual Studio Code",
+                        "Pycharm",
+                        "Package Managers (npm, yarn)",
+                        "MongoDB Compass",
+                        "Chrome Developer Tools",
+                        "Azure DevOps",
+                        "Confluence",
+                        "Postman",
+                        "Blender"]
+                } />
+            </div>
+        </TitledSection>
     </>
 }

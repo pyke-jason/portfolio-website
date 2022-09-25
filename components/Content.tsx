@@ -1,15 +1,20 @@
 import { PageDictionary } from "interfaces/PageDictionary";
+import { useState } from "react";
 import Footer from "./Footer";
-import Section from "./Section";
 
 interface ContentData extends PageDictionary {
-
-    className?: string;
+	onBecameActive: any;
+	className?: string;
 }
 
-export default function Content({ className, pages }: ContentData) {
-    return <div className={className}>
-        {pages.map((x) => <x.component id={x.url} />)}
-        <Footer />
-    </div>
+export default function Content({ className, pages, onBecameActive }: ContentData) {
+	return (
+		<>
+			<main className={className}>
+				{pages.map((page) => (
+					<page.component key={page.id} data={page} onBecameActive={onBecameActive} />
+				))}
+			</main>
+		</>
+	);
 }

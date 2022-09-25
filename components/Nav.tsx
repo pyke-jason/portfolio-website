@@ -1,98 +1,113 @@
-import React, { useState } from "react";
-import { Transition } from "@headlessui/react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { Fragment, useEffect, useState } from "react";
+import { Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
-import {
-  IconLookup,
-  findIconDefinition
-} from '@fortawesome/fontawesome-svg-core'
 import { PageDictionary } from "interfaces/PageDictionary";
-import Link from "next/link";
+import { SectionAssignment } from "pages/index";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { PageData } from "interfaces/PageData";
 
 interface MenuItemData {
-  title: string;
-  url: string;
-  key: React.Key;
+	page: PageData;
+	className?: string;
+	active?: boolean;
+  children?: React.ReactNode;
+	selectActive?: SectionAssignment;
+}
+function MenuItem({ page, className, selectActive, active }: MenuItemData) {
+	return (
+		<li className={className}>
+			<button
+				onClick={() => {
+					selectActive && selectActive(page);
+				}}
+				className={`${
+					active ? "border-stone-300 scale-105" : "border-white"
+				} text-stone-800 border-b-2 transition-opacity hover:border-stone-300 pb-1 text-lg`}
+			>
+				{page.title}
+			</button>
+		</li>
+	);
 }
 
-function Nav({ pages }: PageDictionary) {
-  const [isOpen, setIsOpen] = useState(false);
+function SmallMenuItem({ page, className, children, selectActive }: MenuItemData) {
+	return (
+		<button
+			className={className}
+			onClick={() => {
+				selectActive && selectActive(page);
+			}}
+		>
+			{page.title}
+      {children}
+		</button>
+	);
+}
 
-  function MenuItem({ title, url, key }: MenuItemData) {
-    return <Link key={key}
-      href={url}>
-      <a
-        className="text-gray-300 hover:text-white py-2 text-lg uppercase font-medium"
-      >
-        {title}
-      </a>
-    </Link>
-  }
+interface NavData extends PageDictionary {
+	activeSection?: any;
+	selectActive: SectionAssignment;
+}
 
-  function SmallMenuItem({ title, url, key }: MenuItemData) {
-    return <Link key={key} href={url}>
-      <a
-        className="text-gray-300 hover:text-white block px-10 py-2 text-base font-medium"
-      >
-        {title}
-      </a>
-    </Link>
-  }
+function Nav({ pages, activeSection, selectActive }: NavData) {
+	const [isOpen, setIsOpen] = useState(false);
+	const [atTop, setAtTop] = useState(true);
+	useEffect(() => {
+		window.onscroll = function () {
+			if (window.scrollY == 0) {
+				setAtTop(true);
+			} else {
+				setAtTop(false);
+			}
+		};
+	}, []);
+	return (
+		<nav
+			className={`${
+				isOpen ? "max-h-96" : "max-h-20"
+			} ${atTop ? "" : ""} border-b md:max-h-full transition-all md:transition-none bg-white sticky z-50 top-0 md:w-72 lg:w-4/12 md:h-screen md:border-r overflow-hidden flex md:text-center md:items-center`}
+		>
+			<div id="mobile-menu" className="md:hidden w-full">
+				{pages.map((page, i) => {
+						const isActive = activeSection.id === page.id;
+						return (
+							(isOpen || isActive) && (
+								<SmallMenuItem
+									className={`${isActive && isOpen ? "bg-stone-200" : ""} w-full block px-10 py-5 text-base`}
+									page={page}
+									key={i}
+									selectActive={(page) => {
+										if (isOpen) {
+											selectActive(page);
+											setIsOpen(false);
+										} else {
+											setIsOpen(true);
+										}
+									}}
+								>{!isOpen && isActive && <FontAwesomeIcon color="gray" className="ml-4" icon={faChevronDown} />}</SmallMenuItem>
+							)
+						);
+					})}
+			</div>
 
-  return (
-    <div>
-      <aside className="py-3 bg-blue-400 md:sticky md:top-0 md:w-72 md:h-screen flex flex-col">
-        <div className="my-auto px-10">
-          <div className="flex items-center justify-between md:justify-center">
-            <a href={"#" + pages[0].url} className="hidden md:block mb-3">
-              <Image src="/images/headshot-circle.png" width="170px" height="170px" />
-            </a>
-            <a href={"#" + pages[0].url} className="text-gray-300 hover:text-white md:hidden block py-2 text-base font-medium">
-              {pages[0].title}
-            </a>
-            <div className="flex md:hidden">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                type="button"
-                className="inline-flex text-gray-300 hover:text-white"
-                aria-controls="mobile-menu"
-                aria-expanded="false"
-              >
-                <span className="sr-only">Open main menu</span>
-                {!isOpen ? (
-                  <FontAwesomeIcon size={"xl"} icon={findIconDefinition({ prefix: "fas", iconName: "bars" })} />
-                ) : (
-                  <FontAwesomeIcon size={"xl"} icon={findIconDefinition({ prefix: "fas", iconName: "xmark" })} />
-                )}
-              </button>
-            </div>
-          </div>
-          <div className="hidden md:block">
-            <div className="flex items-center flex-col flex-cent">
-              {pages.map((x, i) => i != 0 && <MenuItem key={i} title={x.title} url={"#" + x.url} />)}
-            </div>
-          </div>
-        </div>
-        <Transition
-          show={isOpen}
-          enter="transition ease-out duration-100 transform"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="transition ease-in duration-75 transform"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
-          {(ref) => (
-            <div id="mobile-menu" className="md:hidden">
-              <div ref={ref} className="pt-2 pb-3 space-y-1">
-                {pages.map((x, i) => i != 0 && <SmallMenuItem key={i} title={x.title} url={"#" + x.url} />)}
-              </div>
-            </div>
-          )}
-        </Transition>
-      </aside>
-    </div>
-  );
+			<div className="hidden md:block ml-auto mr-16">
+				<button
+					onClick={() => selectActive(pages[0])}
+					className={`${
+						activeSection.id == pages[0].id ? "scale-105" : ""
+					} overflow-hidden lg:w-36 lg:h-36 w-32 h-32 transition-transform relative rounded-full hidden md:block mb-8 hover:border-stone-300`}
+				>
+					<Image src="/images/headshot.JPG" layout="fill" objectFit="cover"/>
+				</button>
+				<ul className="space-y-6">
+					{pages.map(
+						(x, i) => i != 0 && <MenuItem key={i} page={x} active={activeSection.id === x.id} selectActive={selectActive} />
+					)}
+				</ul>
+			</div>
+		</nav>
+	);
 }
 
 export default Nav;

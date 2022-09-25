@@ -1,27 +1,49 @@
 import Content from "@components/Content";
 import Nav from "@components/Nav";
-import Title from "@components/Title";
+import TitlePage from "@components/TitlePage";
 import Achievements from "@components/Achievements";
 import Education from "@components/Education";
 import Experience from "@components/Experience";
 import Projects from "@components/Projects";
 import Skills from "@components/Skills";
+import { useState } from "react";
+import Footer from "@components/Footer";
+import { PageData } from "interfaces/PageData";
+
+export type SectionAssignment = (page: PageData) => void;
+
+const sections: PageData[] = [
+	{ title: "About", id: "about", component: TitlePage },
+	{ title: "Education", id: "education", component: Education },
+	{ title: "Experience", id: "experience", component: Experience },
+	{ title: "Projects", id: "projects", component: Projects },
+	{ title: "Skills", id: "skills", component: Skills },
+	{ title: "Achievements", id: "awards", component: Achievements },
+];
 
 export default function Home() {
-  const pages = [
-    { title: "Jason Pyke", url: "about", "component": Title },
-    { title: "Experience", url: "experience", "component": Education },
-    { title: "Education", url: "education", "component": Experience },
-    { title: "Projects", url: "projects", "component": Projects },
-    { title: "Skills", url: "skills", "component": Skills },
-    { title: "Achievements", url: "awards", "component": Achievements },
-  ];
-  return <>
-    {<div className="md:flex">
-      {/* <NavBar className="md:flex-none w-80" /> */}
-      <Nav pages={pages} />
-      <Content pages={pages} className="md:flex-grow" />
-    </div>}
+	const [activeSection, setActiveSection] = useState(sections[0]);
 
-  </>
+	function onBecameActive(section: PageData) {
+		setActiveSection(section);
+	}
+
+	function selectActive(section: PageData) {
+		if (section.id === activeSection.id) return;
+		setActiveSection(section);
+		scrollTo();
+		window.scrollTo({
+			top: document.getElementById(section.id).offsetTop - 300,
+		});
+	}
+
+	return (
+		<>
+			<div className="md:flex">
+				<Nav pages={sections} activeSection={activeSection} selectActive={selectActive} />
+				<Content pages={sections} className="md:flex-grow" onBecameActive={onBecameActive} />
+			</div>
+			<Footer />
+		</>
+	);
 }
