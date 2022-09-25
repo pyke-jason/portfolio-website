@@ -9,6 +9,7 @@ import Skills from "@components/Skills";
 import { useState } from "react";
 import Footer from "@components/Footer";
 import { PageData } from "interfaces/PageData";
+import Head from "next/head";
 
 export type SectionAssignment = (page: PageData) => void;
 
@@ -39,6 +40,10 @@ export default function Home() {
 
 	return (
 		<>
+			<Head>
+				<title>Jason Pyke</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<div className="md:flex">
 				<Nav pages={sections} activeSection={activeSection} selectActive={selectActive} />
 				<Content pages={sections} className="md:flex-grow" onBecameActive={onBecameActive} />
