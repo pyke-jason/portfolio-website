@@ -35,7 +35,7 @@ function TitlePage({ data, onBecameActive }: PageProps) {
 				>
 					<div className="my-auto text-center md:text-left">
 						<div className="mx-auto md:hidden mb-20 w-56 h-56 rounded-full relative overflow-hidden">
-							<Image src="/images/headshot.jpg" layout="fill" objectFit="cover" />
+							<Image src="/images/headshot.JPG" layout="fill" objectFit="cover" />
 						</div>
 						<h1 className="text-5xl title md:text-7xl xl:text-8xl font-bold uppercase mb-5">Jason Pyke</h1>
 						<h2 className="text-2xl mb-5">Software Engineer</h2>

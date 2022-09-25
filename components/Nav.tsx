@@ -98,7 +98,7 @@ function Nav({ pages, activeSection, selectActive }: NavData) {
 						activeSection.id == pages[0].id ? "scale-105" : ""
 					} overflow-hidden lg:w-36 lg:h-36 w-32 h-32 transition-transform relative rounded-full hidden md:block mb-8 hover:border-stone-300`}
 				>
-					<Image src="/images/headshot.jpg" layout="fill" objectFit="cover"/>
+					<Image src="/images/headshot.JPG" layout="fill" objectFit="cover"/>
 				</button>
 				<ul className="space-y-6">
 					{pages.map(
