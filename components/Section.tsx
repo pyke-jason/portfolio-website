@@ -6,12 +6,13 @@ export interface SectionData extends PageProps {
 }
 
 function Section({ children, className, data, onBecameActive }: SectionData) {
-	const ref = useRef();
+	const ref = useRef(null);
 	useEffect(() => {
 		window.addEventListener("scroll", handleScroll);
 	}, []);
 
 	function handleScroll() {
+		if(ref === null || ref.current === null) return;
 		const { offsetTop, offsetHeight } = ref.current;
 		const offsetBottom = offsetTop + offsetHeight;
 		const scrollMid = window.scrollY + window.innerHeight / 2;
