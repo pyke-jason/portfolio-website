@@ -1,10 +1,10 @@
-import PageData from "interfaces/PageData";
+import PageProps from "interfaces/PageProps";
 import SectionEntry from "./SectionEntry";
 import TitledSection from "./TitledSection";
-export default function Education({ id, onBecameActive }: PageData) {
+export default function Education({ data, onBecameActive }: PageProps) {
     return <>
-        <TitledSection onBecameActive={onBecameActive} id={id} title="Education">
-            <SectionEntry className="space-y-6 md:space-y-2" title="University of Washington &ndash; Seattle" subtitle="Bachelor of Science Informatics" date="Sep. 2018 &ndash; Dec. 2022">
+        <TitledSection onBecameActive={onBecameActive} data={data} title="Education">
+            <SectionEntry className="space-y-6" title="University of Washington &ndash; Seattle" subtitle="Bachelor of Science, Informatics" date="Sep. 2018 &ndash; Dec. 2022">
                 <p className="">Focus Area: Software Development (in-major GPA: 3.91, overall 3.67)</p>
                 <div className="flex flex-col md:flex-row ">
                     <h4 className="italic flex-none mr-4">Programming Coursework:</h4>

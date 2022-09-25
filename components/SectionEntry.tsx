@@ -31,7 +31,7 @@ function SectionEntry({ title, subtitle, date, githubUrl, genericLink, googlePla
                     {genericLink && <IconLink circular className="text-5xl" name={{ prefix: "fas", iconName: "link" }} href={genericLink} />}
                 </div>}
 
-            <div className="max-w-4xl mt-5">
+            <div className="max-w-3xl mt-5">
                 <div className={className}>{children}</div>
             </div>
 

@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-    scroll-behavior: smooth;
+.lines-background {
+	background-image: url("../public/images/lines-background.svg");
+	background-repeat: repeat;
+	background-size: 20em;
+}
+
+.fancy-background {
+	background-image: radial-gradient(circle 800px at center center, #fdfaff, transparent),
+		radial-gradient(circle 600px at calc(100% - 300px) 300px, #ebfffa, transparent),
+		radial-gradient(circle 800px at bottom center, #e4f9ff, transparent),
+		radial-gradient(circle 800px at left top, #f9feff, transparent),
+		radial-gradient(circle 800px at calc(50% - 600px) calc(100% - 100px), #fddbf0, #fffcfe, transparent);
+}
+
+.title {
+	background-image: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(24,19,0,1) 16%, rgba(64,51,0,1) 24%, rgba(43,3,84,1) 44%, rgba(0,0,0,1) 100%);
+    -webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
 }

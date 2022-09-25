@@ -1,48 +1,48 @@
 import Content from "@components/Content";
 import Nav from "@components/Nav";
-import Title from "@components/Title";
+import TitlePage from "@components/TitlePage";
 import Achievements from "@components/Achievements";
 import Education from "@components/Education";
 import Experience from "@components/Experience";
 import Projects from "@components/Projects";
 import Skills from "@components/Skills";
 import { useState } from "react";
-import { useRouter } from "next/router";
 import Footer from "@components/Footer";
+import { PageData } from "interfaces/PageData";
 
-const pages = [
-	{ title: "Jason Pyke", id: "about", component: Title },
+export type SectionAssignment = (page: PageData) => void;
+
+const sections: PageData[] = [
+	{ title: "About", id: "about", component: TitlePage },
 	{ title: "Education", id: "education", component: Education },
 	{ title: "Experience", id: "experience", component: Experience },
 	{ title: "Projects", id: "projects", component: Projects },
 	{ title: "Skills", id: "skills", component: Skills },
 	{ title: "Achievements", id: "awards", component: Achievements },
 ];
-function getPage(id: string) {
-	return pages.find((x) => {
-		x.id == id;
-	});
-}
 
 export default function Home() {
-	const [activeSection, setActiveSection] = useState("education");
+	const [activeSection, setActiveSection] = useState(sections[0]);
 
-	function onBecameActive(id: string) {
-		setActiveSection(id);
+	function onBecameActive(section: PageData) {
+		setActiveSection(section);
 	}
 
-	function selectActive(id: string) {
-		setActiveSection(id);
+	function selectActive(section: PageData) {
+		if (section.id === activeSection.id) return;
+		setActiveSection(section);
+		scrollTo();
 		window.scrollTo({
-			top: document.getElementById(id).offsetTop - 60,
-			behavior: "smooth",
+			top: document.getElementById(section.id).offsetTop - 300,
 		});
 	}
 
 	return (
 		<>
-			<Nav pages={pages} activeSection={activeSection} selectActive={selectActive} />
-			<Content pages={pages} className="md:ml-72" onBecameActive={onBecameActive} />
+			<div className="md:flex">
+				<Nav pages={sections} activeSection={activeSection} selectActive={selectActive} />
+				<Content pages={sections} className="md:flex-grow" onBecameActive={onBecameActive} />
+			</div>
 			<Footer />
 		</>
 	);

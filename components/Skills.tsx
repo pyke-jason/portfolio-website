@@ -1,4 +1,4 @@
-import PageData from "interfaces/PageData";
+import PageProps from "interfaces/PageProps";
 import TitledSection from "./TitledSection";
 
 interface SkillData {
@@ -18,9 +18,9 @@ function SkillEntry({ title, skills: children }: SkillData) {
 
     </>
 }
-export default function Skills({ id, onBecameActive }: PageData) {
+export default function Skills({ data, onBecameActive }: PageProps) {
     return <>
-        <TitledSection onBecameActive={onBecameActive} id={id} title="Skills">
+        <TitledSection onBecameActive={onBecameActive} data={data} title="Skills">
             <div>
                 <SkillEntry title={"Programming Languages (proficient)"} skills={
                     ["C#", "Python", "C", "TypeScript", "JavaScript", "Java", "SQL"]

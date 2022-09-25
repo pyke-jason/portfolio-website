@@ -1,11 +1,11 @@
-import PageData from "interfaces/PageData";
+import PageProps from "interfaces/PageProps";
 import TitledSection from "./TitledSection";
 import SectionEntry from "./SectionEntry";
 import BulletedNotes from "./BulletedNotes";
 
-export default function Projects({ id, onBecameActive }: PageData) {
+export default function Projects({ data, onBecameActive }: PageProps) {
     return <>
-        <TitledSection onBecameActive={onBecameActive} id={id} title="Projects">
+        <TitledSection onBecameActive={onBecameActive} data={data} title="Projects">
             <SectionEntry
                 title="Coalition &ndash; Multiplayer FPS"
                 subtitle="Mobile Game"

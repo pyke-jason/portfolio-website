@@ -1,87 +1,108 @@
-import React, { useEffect, useState } from "react";
-import { Listbox, Transition } from "@headlessui/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { Fragment, useEffect, useState } from "react";
+import { Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
-import { IconLookup, findIconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { PageDictionary } from "interfaces/PageDictionary";
+import { SectionAssignment } from "pages/index";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { PageData } from "interfaces/PageData";
 
 interface MenuItemData {
-	title: string;
-	id: string;
+	page: PageData;
 	className?: string;
 	active?: boolean;
-	selectActive?: (id: string) => void;
+  children?: React.ReactNode;
+	selectActive?: SectionAssignment;
 }
-function MenuItem({ title, id, className, selectActive, active }: MenuItemData) {
+function MenuItem({ page, className, selectActive, active }: MenuItemData) {
 	return (
 		<li className={className}>
 			<button
 				onClick={() => {
-					selectActive && selectActive(id);
+					selectActive && selectActive(page);
 				}}
 				className={`${
 					active ? "border-stone-300 scale-105" : "border-white"
-				} text-stone-800 border-b-2 transition-all hover:border-stone-300 pb-1 text-lg`}
+				} text-stone-800 border-b-2 transition-opacity hover:border-stone-300 pb-1 text-lg`}
 			>
-				{title}
+				{page.title}
 			</button>
 		</li>
 	);
 }
 
-function SmallMenuItem({ title, id, className, active, selectActive }: MenuItemData) {
+function SmallMenuItem({ page, className, children, selectActive }: MenuItemData) {
 	return (
-		<div className={className}>
-			<button
-				onClick={() => {
-					selectActive && selectActive(id);
-				}}
-				className={`${
-					active ? "text-stone-800 scale-105 bg-stone-100" : "text-blue-500"
-				} text-left hover:bg-stone-300 block px-10 text-base font-medium`}
-			>
-				{title}
-			</button>
-		</div>
+		<button
+			className={className}
+			onClick={() => {
+				selectActive && selectActive(page);
+			}}
+		>
+			{page.title}
+      {children}
+		</button>
 	);
 }
 
 interface NavData extends PageDictionary {
 	activeSection?: any;
-	selectActive: (id: string) => void;
+	selectActive: SectionAssignment;
 }
 
 function Nav({ pages, activeSection, selectActive }: NavData) {
 	const [isOpen, setIsOpen] = useState(false);
-  const [selectedSection, setSelectedSection] = useState({id: })
+	const [atTop, setAtTop] = useState(true);
+	useEffect(() => {
+		window.onscroll = function () {
+			if (window.scrollY == 0) {
+				setAtTop(true);
+			} else {
+				setAtTop(false);
+			}
+		};
+	}, []);
 	return (
-		<nav className="bg-white sticky md:fixed z-50 top-0 md:w-72 md:h-screen md:border-r md:flex text-center justify-center items-center">
-			<Listbox value={selectedPerson} onChange={setSelectedPerson}>
-				<Listbox.Button>{selectedPerson.name}</Listbox.Button>
-				<Listbox.Options>
-					{people.map((person) => (
-						<Listbox.Option key={person.id} value={person} disabled={person.unavailable}>
-							{person.name}
-						</Listbox.Option>
-					))}
-				</Listbox.Options>
-			</Listbox>
-
-			<div className="hidden md:block">
-				<button
-					onClick={() => selectActive(pages[0].id)}
-					className={`${
-						activeSection == pages[0].id ? "border-stone-300 border" : "border-white"
-					} w-40 h-40 rounded-full hidden md:block mb-3 hover:border-stone-300 border-2`}
-				>
-					<Image src="/images/headshot-circle.png" width="160px" height="160px" />
-				</button>
-				<ul className="space-y-2">
-					{pages.map(
-						(x, i) =>
-							i != 0 && (
-								<MenuItem key={i} active={activeSection === x.id} title={x.title} id={x.id} selectActive={selectActive} />
+		<nav
+			className={`${
+				isOpen ? "max-h-96" : "max-h-20"
+			} ${atTop ? "" : ""} border-b md:max-h-full transition-all md:transition-none bg-white sticky z-50 top-0 md:w-72 lg:w-4/12 md:h-screen md:border-r overflow-hidden flex md:text-center md:items-center`}
+		>
+			<div id="mobile-menu" className="md:hidden w-full">
+				{pages.map((page, i) => {
+						const isActive = activeSection.id === page.id;
+						return (
+							(isOpen || isActive) && (
+								<SmallMenuItem
+									className={`${isActive && isOpen ? "bg-stone-200" : ""} w-full block px-10 py-5 text-base`}
+									page={page}
+									key={i}
+									selectActive={(page) => {
+										if (isOpen) {
+											selectActive(page);
+											setIsOpen(false);
+										} else {
+											setIsOpen(true);
+										}
+									}}
+								>{!isOpen && isActive && <FontAwesomeIcon color="gray" className="ml-4" icon={faChevronDown} />}</SmallMenuItem>
 							)
+						);
+					})}
+			</div>
+
+			<div className="hidden md:block ml-auto mr-16">
+				<button
+					onClick={() => selectActive(pages[0])}
+					className={`${
+						activeSection.id == pages[0].id ? "scale-105" : ""
+					} overflow-hidden lg:w-36 lg:h-36 w-32 h-32 transition-transform relative rounded-full hidden md:block mb-3 hover:border-stone-300`}
+				>
+					<Image src="/images/headshot.jpg" layout="fill" objectFit="cover"/>
+				</button>
+				<ul className="space-y-6">
+					{pages.map(
+						(x, i) => i != 0 && <MenuItem key={i} page={x} active={activeSection.id === x.id} selectActive={selectActive} />
 					)}
 				</ul>
 			</div>

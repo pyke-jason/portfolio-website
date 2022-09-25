@@ -1,5 +1,7 @@
-export default interface PageData {
+import PageProps from "./PageProps";
+
+export interface PageData {
+    title: string;
     id: string;
-    className?: string;
-    onBecameActive: (id: string) => void;
-}
+    component: ({ data, onBecameActive }: PageProps) => JSX.Element;
+  }
