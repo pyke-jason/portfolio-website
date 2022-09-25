@@ -96,7 +96,7 @@ function Nav({ pages, activeSection, selectActive }: NavData) {
 					onClick={() => selectActive(pages[0])}
 					className={`${
 						activeSection.id == pages[0].id ? "scale-105" : ""
-					} overflow-hidden lg:w-36 lg:h-36 w-32 h-32 transition-transform relative rounded-full hidden md:block mb-3 hover:border-stone-300`}
+					} overflow-hidden lg:w-36 lg:h-36 w-32 h-32 transition-transform relative rounded-full hidden md:block mb-8 hover:border-stone-300`}
 				>
 					<Image src="/images/headshot.jpg" layout="fill" objectFit="cover"/>
 				</button>
