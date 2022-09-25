@@ -15,8 +15,8 @@ export default function Projects({ data, onBecameActive }: PageProps) {
             >
                 <BulletedNotes
                     notes={[
-                        "Created a real-time multiplayer video game using a client authoritative model with over 4 million downloads",
-                        "Created REST API for dynamic content delivery to clients",
+                        "Created a real-time multiplayer video game using a client authoritative networking model with over 4 million downloads",
+                        "Designed a REST API for dynamic content delivery to clients",
                         "Utilized: C#, JavaScript, Node.js, Unity, Local Persistent Data, Cloud Storage, Caching, Json.NET"
                     ]} />
             </SectionEntry>

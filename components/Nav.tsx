@@ -66,7 +66,7 @@ function Nav({ pages, activeSection, selectActive }: NavData) {
 		<nav
 			className={`${
 				isOpen ? "max-h-96" : "max-h-20"
-			} ${atTop ? "" : ""} border-b md:max-h-full transition-all md:transition-none bg-white sticky z-50 top-0 md:w-72 lg:w-4/12 md:h-screen md:border-r overflow-hidden flex md:text-center md:items-center`}
+			} ${atTop ? "" : ""} border-b md:max-h-full transition-all md:transition-none bg-white sticky z-50 top-0 md:w-72 md:h-screen md:border-r overflow-hidden flex md:text-center md:items-center`}
 		>
 			<div id="mobile-menu" className="md:hidden w-full">
 				{pages.map((page, i) => {

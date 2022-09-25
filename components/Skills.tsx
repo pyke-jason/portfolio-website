@@ -29,7 +29,7 @@ export default function Skills({ data, onBecameActive }: PageProps) {
                     ["C++", "HTML/CSS", "GO", "Dart", "R"]
                 } />
                 <SkillEntry title={"Frameworks & Libraries"} skills={
-                    [".NET Core", ".NET Framework", "Next.js", "React.js", "OpenCV (python)", "numpy"]
+                    [".NET Core", ".NET Framework", "Next.js", "React.js",  "OpenCV (python)", "numpy", "pandas", "scikit-learn"]
                 } />
                 <SkillEntry title={"Databases"} skills={
                     ["Microsoft SQL Server", "SQLite", "MongoDB"]
@@ -37,6 +37,7 @@ export default function Skills({ data, onBecameActive }: PageProps) {
                 <SkillEntry title={"Tools"} skills={
                     ["Docker",
                         "Git",
+                        "CMake",    
                         "Git LFS",
                         "Visual Studio",
                         "Visual Studio Code",
@@ -48,6 +49,23 @@ export default function Skills({ data, onBecameActive }: PageProps) {
                         "Confluence",
                         "Postman",
                         "Blender"]
+                } />
+                <SkillEntry title={"Concepts"} skills={
+                    [
+                        "Objected Oriented Programming & Design",
+                        "RESTful API",
+                        "Agile Development Methodology",
+                        "MVC architecture",
+                    ]
+                } />
+                <SkillEntry title={"Soft Skills"} skills={
+                    [
+                        "Written & Verbal Communication",
+                        "Teamwork",
+                        "Collaboration",
+                        "Problem Solving",
+                        "Persistence"
+                    ]
                 } />
             </div>
         </TitledSection>
