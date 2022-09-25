@@ -29,7 +29,7 @@ function TitlePage({ data, onBecameActive }: PageProps) {
 		<>
 			<div className="fancy-background">
 				<Section
-					className="py-12 px-12 xl:px-20 lines-background border-b md:h-screen flex flex-col"
+					className="py-12 px-4 xl:px-20 lines-background border-b md:h-screen flex flex-col"
 					data={data}
 					onBecameActive={onBecameActive}
 				>
