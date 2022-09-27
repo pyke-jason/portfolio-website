@@ -12,10 +12,10 @@ export default function Experience({ data, onBecameActive }: PageProps) {
                 date="July 2022 &ndash; Present"
             >
                 <BulletedNotes
-                    notes={["Designed authoritative multiplayer game server architecture for a mixed reality wargaming application with TLS handshake and reliable packet sequencing",
-                        "Improved framerate on HoloLens by 63% through computation offloading and algorithm optimization as well as implementing an object pooling system and reducing memory allocations",
+                    notes={["Designed authoritative multiplayer game server architecture for a mixed reality wargaming application using System.NET ",
+                        "Improved framerate on Microsoft HoloLens 2 by 63% through computation offloading and algorithm optimization as well as implementing an object pooling system and memory allocation reduction",
                         "Reduced network traffic by 37% by implementing allocation-free message encoding/decoding",
-                        "Leveraged knowledge in client/server architecture, UDP/TCP and Transport Layer Security, programmed in C# using Visual Studio, and debugged using Visual Studio, Unity Profiler, and HoloLens debug interface"
+                        "Leveraged knowledge in client/server architecture, UDP/TCP and Transport Layer Security, programmed in C# using Visual Studio, and debugged using Visual Studio, Unity Profiler, and HoloLens Mixed Reality Portal"
                     ]} />
             </SectionEntry>
             <SectionEntry
@@ -25,7 +25,7 @@ export default function Experience({ data, onBecameActive }: PageProps) {
             >
                 <BulletedNotes
                     notes={[
-                        " Created and validated a patent-pending automated image screening algorithm for arthritis with 95.5% accuracy to a technician assisted method using OpenCV and Human Pose Estimation",
+                        "Created and validated a patent-pending automated image screening algorithm for arthritis with 95.5% accuracy to a technician assisted method using OpenCV and Human Pose Estimation",
                         "Established remote testing and development in HPC system using Docker and bash scripts",
                         "Implemented mobile photo capture and upload pages for REST API using Flutter",
                         "Leveraged knowledge in Mobile Application Development and Computer Vision, programmed using Python and Dart, and debugged using Visual Studio Code"
