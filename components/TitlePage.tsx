@@ -1,11 +1,12 @@
 import PageProps from "interfaces/PageProps";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import Section from "./Section";
 import { UrlObject } from "url";
 import ContactDropdown from "./ContactDropdown";
 import IconLink from "./IconLink";
+import UserSkeleton from "./UserSkeleton";
 
 interface StyledLinkData {
 	href: string;
@@ -25,6 +26,7 @@ function StyledLink({ href, children, className }: StyledLinkData) {
 }
 
 function TitlePage({ data, onBecameActive }: PageProps) {
+	const [loading, setLoading] = useState(true);
 	return (
 		<>
 			<div className="fancy-background">
@@ -34,8 +36,9 @@ function TitlePage({ data, onBecameActive }: PageProps) {
 					onBecameActive={onBecameActive}
 				>
 					<div className="my-auto text-center md:text-left">
-						<div className="mx-auto md:hidden mb-20 w-56 h-56 rounded-full relative overflow-hidden">
-							<Image src="/images/headshot.JPG" layout="fill" objectFit="cover" />
+						<div className={`mx-auto md:hidden mb-20 w-56 h-56 rounded-full relative overflow-hidden`}>
+							<Image onLoadingComplete={() => setLoading(false)} src="/images/headshot.JPG" layout="fill" objectFit="cover" />
+							{loading && <UserSkeleton className="w-full h-full" iconSize="8x" />}
 						</div>
 						<h1 className="text-5xl title md:text-7xl xl:text-8xl font-bold uppercase mb-5">Jason Pyke</h1>
 						<h2 className="text-2xl mb-5">Software Engineer</h2>
