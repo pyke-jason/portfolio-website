@@ -34,7 +34,7 @@ export default function Home() {
 		setActiveSection(section);
 		scrollTo();
 		window.scrollTo({
-			top: document.getElementById(section.id).offsetTop - 300,
+			top: document.getElementById(section.id).offsetTop - window.innerHeight / 4,
 		});
 	}
 
