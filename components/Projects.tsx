@@ -56,8 +56,20 @@ export default function Projects({ data, onBecameActive }: PageProps) {
             >
                 <BulletedNotes
                     notes={[
-                        "Developed and populated a database for an airline's flights database using stored and insert procedures, business rules, synthetic transactions, and complex queries ",
+                        "Developed and populated a database for an airline's flights database using stored and insert procedures, business rules, synthetic transactions, and complex queries",
                         "Utilized: SQL, MS SQL Server 2019"
+                    ]} />
+            </SectionEntry>
+            <SectionEntry
+                title="Memory Manager"
+                subtitle="CS School Project"
+                githubUrl="https://github.com/pyke-jason/memory-manager"
+                date="June 2022"
+            >
+                <BulletedNotes
+                    notes={[
+                        "Implemented a memory manager library in C using a block linked-list and headers",
+                        "Utilized: C, CMake, git"
                     ]} />
             </SectionEntry>
         </TitledSection>

@@ -5,7 +5,7 @@ export interface SectionData extends PageProps {
 	children?: React.ReactNode;
 }
 
-function Section({ children, className, data, onBecameActive }: SectionData) {
+function Section({ children, className, data, onBecameActive, ...attributes }: SectionData) {
 	const ref = useRef(null);
 	useEffect(() => {
 		window.addEventListener("scroll", handleScroll);
@@ -23,7 +23,7 @@ function Section({ children, className, data, onBecameActive }: SectionData) {
 
 	return (
 		<>
-			<section id={data.id} ref={ref}>
+			<section id={data.id} ref={ref} {...attributes}>
 				<div className={`${className} space-y-12`}>{children}</div>
 			</section>
 		</>
