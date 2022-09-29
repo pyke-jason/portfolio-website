@@ -51,6 +51,7 @@ export default function Skills({ data, onBecameActive }: PageProps) {
 							"Visual Studio",
 							"Visual Studio Code",
 							"PyCharm",
+                            "Android Studio",
 							"Amazon EMR",
 							"Package Managers (npm, yarn)",
 							"MongoDB Compass",
@@ -58,6 +59,7 @@ export default function Skills({ data, onBecameActive }: PageProps) {
 							"Azure DevOps",
 							"Confluence",
 							"Postman",
+                            "Tableau",
 							"Blender",
 						]}
 					/>
@@ -66,9 +68,13 @@ export default function Skills({ data, onBecameActive }: PageProps) {
 						skills={[
 							"Objected Oriented Programming & Design Patterns (Creational, Structural, Behavioral)",
 							"RESTful API Design",
-							"Separation of Concerns & Cohesion",
-							"Agile Development Methodology",
 							"MVC architecture",
+							"Separation of Concerns & Cohesion",
+                            "Parallelism, Fault Tolerance, Data Distribution, Load Balancing",
+							"Agile Development Methodology",
+                            "Systems Development Lifecycle (Waterfall)",
+                            "Rapid Application Development",
+                            "Lean Methodology",
 						]}
 					/>
 					<SkillEntry
