@@ -26,7 +26,7 @@ export default function Experience({ data, onBecameActive }: PageProps) {
 						notes={[
 							"Created and validated a patent-pending automated image screening algorithm for arthritis with 95.5% accuracy to the technician assisted method using Python, OpenCV, and Human Pose Estimation",
 							"Established remote testing and development in HPC system using Docker and bash scripts",
-							"Implemented mobile photo capture and upload pages for REST API using Flutter",
+							"Implemented mobile photo capture and upload pages for the REST API using Dart and Flutter",
 							"Leveraged knowledge in Mobile Application Development and Computer Vision, programmed using Python and Dart, and debugged using Visual Studio Code",
 						]}
 					/>

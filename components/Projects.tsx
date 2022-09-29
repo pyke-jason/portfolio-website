@@ -68,7 +68,7 @@ export default function Projects({ data, onBecameActive }: PageProps) {
             >
                 <BulletedNotes
                     notes={[
-                        "Implemented a memory manager library in C using a block linked-list and headers",
+                        "Implemented a memory manager library in C using a memory block linked-list and headers",
                         "Utilized: C, CMake, git"
                     ]} />
             </SectionEntry>
