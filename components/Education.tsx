@@ -10,9 +10,9 @@ export default function Education({ data, onBecameActive }: PageProps) {
                     <h4 className="italic flex-none mr-4">Programming Coursework:</h4>
                     <p className="grow-0">Data Structures & Algorithms, Hardware/Software Interface, Computer Vision & Artificial Intelligence, Machine Learning</p>
                 </div>
-                <div className="italic flex flex-col md:flex-row">
+                <div className="flex flex-col md:flex-row">
                     <h4 className="flex-none mr-4">Informatics Coursework:</h4>
-                    <p className="flex-auto">Full-Stack Web Development, Software Architecture, Mobile Application Development, Database Design & Management, Design Methods, Ethics & Policy</p>
+                    <p className="grow0">Full-Stack Web Development, Software Architecture, Mobile Application Development, Systems Design, Database Design & Management, Design Methods, Ethics & Policy</p>
                 </div>
             </SectionEntry>
         </TitledSection>
