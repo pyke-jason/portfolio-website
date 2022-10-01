@@ -35,14 +35,14 @@ function TitlePage({ data, onBecameActive }: PageProps) {
 					onBecameActive={onBecameActive}
 				>
 					<div className="my-auto text-center md:text-left">
-						<div className={`mx-auto md:hidden mb-20 w-56 h-56 rounded-full relative overflow-hidden`}>
+						<div className={`mx-auto md:hidden mb-20 w-56 h-56 rounded-full border-8 border-slate-100 relative overflow-hidden`}>
 							<Image onLoadingComplete={() => setLoading(false)} src="/images/headshot.JPG" layout="fill" objectFit="cover"  alt="Profile picture"/>
 							{loading && <UserSkeleton className="w-full h-full" iconSize="8x" />}
 						</div>
 						<h1 className="text-5xl title md:text-7xl xl:text-8xl font-bold uppercase mb-5">Jason Pyke</h1>
 						<h2 className="text-2xl mb-5">Software Engineer</h2>
 						<h3 className="mb-5">Seattle, WA - pyke.jason1@gmail.com</h3>
-						<p className="mb-12">Passionate software engineer who enjoys solving problems and building applications.</p>
+						<p className="mb-12">Versatile software engineer who is passionate about solving problems and building thoughtful solutions.</p>
 						<StyledLink href="/resume.pdf" className="mb-12">
 							Resume (PDF)
 						</StyledLink>

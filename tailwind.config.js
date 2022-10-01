@@ -7,6 +7,7 @@ module.exports = {
     extend: {      
       transitionProperty: {
       'max-height': 'max-height',
+      "brightness": "brightness"
     }},
   },
   plugins: [],

@@ -23,7 +23,7 @@ function MenuItem({ page, className, selectActive, active }: MenuItemData) {
 				}}
 				className={`${
 					active ? "border-stone-300 scale-105" : "border-white"
-				} text-stone-800 border-b-2 transition-opacity hover:border-stone-300 pb-1 text-lg`}
+				} text-stone-800 border-b-2 transition-all hover:border-stone-300 pb-1 text-lg`}
 			>
 				{page.title}
 			</button>
@@ -100,7 +100,7 @@ function Nav({ pages, activeSection, selectActive }: NavData) {
 					onClick={() => selectActive(pages[0])}
 					className={`${
 						activeSection.id == pages[0].id ? "scale-105" : ""
-					} overflow-hidden lg:w-36 lg:h-36 w-32 h-32 transition-transform relative rounded-full hidden md:block mb-8 hover:border-stone-300`}
+					} overflow-hidden lg:w-36 lg:h-36 w-32 h-32 box-content transition-all relative rounded-full hidden md:block mb-8 hover:brightness-90`}
 				>
 					<Image onLoadingComplete={() => setLoading(false)} src="/images/headshot.JPG" layout="fill" objectFit="cover" alt="Profile picture" />
 					{loading && <UserSkeleton className="w-full h-full" iconSize="8x" />}
