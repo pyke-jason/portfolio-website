@@ -135,7 +135,7 @@ function Nav({ pages }: NavData) {
 											aria-label="Home"
 											onClick={() => selectActive(pages[0])}
 											style={{ transform: "var(--avatar-image-transform)" }}
-											className={"h-16 w-16 origin-left pointer-events-auto"}
+											className={"block h-16 w-16 origin-left pointer-events-auto"}
 										>
 											<Image
 												sizes="4rem"
