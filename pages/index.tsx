@@ -6,14 +6,16 @@ import Education from "@components/Education";
 import Experience from "@components/Experience";
 import Projects from "@components/Projects";
 import Skills from "@components/Skills";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import Footer from "@components/Footer";
 import { PageData } from "interfaces/PageData";
 import Head from "next/head";
+import React from "react";
+import { PageComponentData } from "interfaces/PageComponentData";
 
 export type SectionAssignment = (page: PageData) => void;
 
-const sections: PageData[] = [
+const sectionComponents: PageComponentData[] = [
 	{ title: "About", id: "about", component: TitlePage },
 	{ title: "Education", id: "education", component: Education },
 	{ title: "Experience", id: "experience", component: Experience },
@@ -22,22 +24,33 @@ const sections: PageData[] = [
 	{ title: "Achievements", id: "awards", component: Achievements },
 ];
 
+const allowed = ["title", "id"];
+const sections: PageData[] = sectionComponents.map((raw) => {
+	return { title: raw.title, id: raw.id };
+});
+
+export const ActiveSectionDispatchContext = React.createContext(null);
+export const ActiveSectionContext = React.createContext(null);
+
+const initialState = { ...sections[0] };
+
+function reducer(state, action) {
+	switch (action.type) {
+		case "select":
+			window.scrollTo({
+				// top of section - 1/4 of window innerheight - navbar height
+				top: document.getElementById(action.page.id).offsetTop - window.innerHeight / 4 - 80,
+			});
+			return action.page;
+		case "in-view":
+			return action.page;
+		default:
+			throw new Error();
+	}
+}
+
 export default function Home() {
-	const [activeSection, setActiveSection] = useState(sections[0]);
-
-	function onBecameActive(section: PageData) {
-		setActiveSection(section);
-	}
-
-	function selectActive(section: PageData) {
-		if (section.id === activeSection.id) return;
-		setActiveSection(section);
-		scrollTo();
-		window.scrollTo({
-			// top of section - 1/4 of window innerheight - navbar height
-			top: document.getElementById(section.id).offsetTop - window.innerHeight / 4 - 80,
-		});
-	}
+	const [activeSection, dispatch] = useReducer(reducer, initialState);
 
 	return (
 		<>
@@ -45,11 +58,16 @@ export default function Home() {
 				<title>Jason Pyke</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
-			<div className="md:flex">
-				<Nav pages={sections} activeSection={activeSection} selectActive={selectActive} />
-				<Content pages={sections} className="md:flex-grow" onBecameActive={onBecameActive} />
+
+			<div className="relative">
+				<ActiveSectionDispatchContext.Provider value={dispatch}>
+					<ActiveSectionContext.Provider value={activeSection}>
+						<Nav pages={sections} />
+						<Content pages={sectionComponents} className="mx-auto max-w-5xl" />
+					</ActiveSectionContext.Provider>
+				</ActiveSectionDispatchContext.Provider>
+				<Footer />
 			</div>
-			<Footer />
 		</>
 	);
 }

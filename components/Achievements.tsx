@@ -3,9 +3,9 @@ import BulletedNotes, { BulletedNote } from "./BulletedNotes";
 import SectionEntry from "./SectionEntry";
 import TitledSection from "./TitledSection";
 
-export default function Achievements({ data, onBecameActive }: PageProps) {
+export default function Achievements({ data }: PageProps) {
     return <>
-        <TitledSection data={data} onBecameActive={onBecameActive} title="Achievements">
+        <TitledSection data={data} title="Achievements">
             <SectionEntry title="Eagle Scout" subtitle="Boy Scouts of America" date="2017" />
             <SectionEntry title="Student Athlete" subtitle="University of Washington" date="Sep. 2018 &ndash; Sep. 2020">
                 <BulletedNote note={"Rowing athlete at National Championship D1 program."} />

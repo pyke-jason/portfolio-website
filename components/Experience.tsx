@@ -3,10 +3,10 @@ import SectionEntry from "./SectionEntry";
 import BulletedNotes from "./BulletedNotes";
 import TitledSection from "./TitledSection";
 
-export default function Experience({ data, onBecameActive }: PageProps) {
+export default function Experience({ data }: PageProps) {
 	return (
 		<>
-			<TitledSection onBecameActive={onBecameActive} data={data} title="Experience">
+			<TitledSection data={data} title="Experience">
 				<SectionEntry title="Software Engineer, Intern" subtitle="Booz Allen Hamilton" date="July 2022 &ndash; Present">
 					<BulletedNotes
 						notes={[

@@ -1,9 +1,9 @@
 import PageProps from "interfaces/PageProps";
 import SectionEntry from "./SectionEntry";
 import TitledSection from "./TitledSection";
-export default function Education({ data, onBecameActive }: PageProps) {
+export default function Education({ data }: PageProps) {
     return <>
-        <TitledSection onBecameActive={onBecameActive} data={data} title="Education">
+        <TitledSection data={data} title="Education">
             <SectionEntry className="space-y-6" title="University of Washington &ndash; Seattle" subtitle="Bachelor of Science, Informatics" date="Sep. 2018 &ndash; Dec. 2022">
                 <p className="">Focus Area: Software Development (in-major GPA: 3.91, overall 3.67)</p>
                 <div className="flex flex-col md:flex-row ">

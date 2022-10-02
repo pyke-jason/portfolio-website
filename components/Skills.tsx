@@ -16,10 +16,10 @@ function SkillEntry({ title, skills: children }: SkillData) {
 		</>
 	);
 }
-export default function Skills({ data, onBecameActive }: PageProps) {
+export default function Skills({ data }: PageProps) {
 	return (
 		<>
-			<TitledSection onBecameActive={onBecameActive} data={data} title="Skills">
+			<TitledSection data={data} title="Skills">
 				<div>
 					<SkillEntry
 						title={"Programming Languages (proficient)"}

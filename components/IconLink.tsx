@@ -17,7 +17,7 @@ interface IconLinkData extends React.HTMLAttributes<HTMLElement> {
 
 export default function IconLink({ name, href, className, noHighlight: disableHighlight, circular, children, ...attributes}: IconLinkData) {
     return <Link href={href} >
-        <a target="_blank" rel="noopener noreferrer" {...attributes} className={`transition-colors text-stone-900 hover:text-stone-600 outline-none  ${className}`}>
+        <a target="_blank" rel="noopener noreferrer" {...attributes} className={`transition-colors text-zinc-600 hover:text-zinc-900 outline-none  ${className}`}>
             <span className={"fa-layers fa-fw fa-si"}>
                 {circular && <FontAwesomeIcon className='font-medium' icon={findIconDefinition({ prefix: "fas", iconName: "circle" })} />}
                 {circular && <FontAwesomeIcon icon={findIconDefinition(name)} inverse transform="shrink-8" />}

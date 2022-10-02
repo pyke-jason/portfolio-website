@@ -1,25 +1,32 @@
+import { useScrollPosition } from "@n8tb1t/use-scroll-position";
 import PageProps from "interfaces/PageProps";
-import { useEffect, useRef } from "react";
+import { ActiveSectionContext, ActiveSectionDispatchContext } from "pages";
+import { useContext, useEffect, useRef } from "react";
 
 export interface SectionData extends PageProps {
 	children?: React.ReactNode;
 }
 
-function Section({ children, className, data, onBecameActive, ...attributes }: SectionData) {
+function Section({ children, className, data, ...attributes }: SectionData) {
 	const ref = useRef(null);
-	useEffect(() => {
-		window.addEventListener("scroll", handleScroll);
-	}, []);
+	const dispatch = useContext(ActiveSectionDispatchContext);
+	const activeSection = useContext(ActiveSectionContext);
 
-	function handleScroll() {
-		if(ref === null || ref.current === null) return;
+	function updateScroll(amount) {
+		if (ref === null || ref.current === null) return;
 		const { offsetTop, offsetHeight } = ref.current;
 		const offsetBottom = offsetTop + offsetHeight;
-		const scrollMid = window.scrollY + window.innerHeight / 2;
+		const scrollMid = amount + 400;
 		if (scrollMid >= offsetTop && scrollMid <= offsetBottom) {
-			onBecameActive(data);
+			if (activeSection.id !== data.id) {
+				dispatch({ type: "in-view", page: data });
+			}
 		}
 	}
+
+	useScrollPosition(({ prevPos, currPos }) => {
+		updateScroll(-currPos.y);
+	});
 
 	return (
 		<>

@@ -3,9 +3,9 @@ import TitledSection from "./TitledSection";
 import SectionEntry from "./SectionEntry";
 import BulletedNotes from "./BulletedNotes";
 
-export default function Projects({ data, onBecameActive }: PageProps) {
+export default function Projects({ data }: PageProps) {
     return <>
-        <TitledSection onBecameActive={onBecameActive} data={data} title="Projects">
+        <TitledSection data={data} title="Projects">
             <SectionEntry
                 title="Coalition &ndash; Multiplayer FPS"
                 subtitle="Mobile Game"
