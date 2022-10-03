@@ -2,7 +2,6 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import { ActiveSectionContext, ActiveSectionDispatchContext } from "pages/index";
 
-import UserSkeleton from "./UserSkeleton";
 import { useScrollPosition } from "@n8tb1t/use-scroll-position";
 import { PageData } from "interfaces/PageData";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
@@ -97,7 +96,7 @@ function Nav({ pages }: NavData) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [atTop, setAtTop] = useState(true);
 	const [loading, setLoading] = useState(true);
-	const maxHeight = 200;
+	const maxHeight = 180;
 	const navHeight = 64;
 	const minMb = maxHeight - navHeight;
 	const activeSection: PageData = useContext(ActiveSectionContext);
@@ -129,10 +128,10 @@ function Nav({ pages }: NavData) {
 				maxScrollY = scroll + navHeight;
 			}
 		}
-
+		
 		document.documentElement.style.setProperty(
 			"--avatar-image-transform",
-			`translate3d(1px, 0px, 0px) scale(${0.6 + Math.min(Math.max(minMb - scroll, 0), minMb) / (1 * minMb)})`
+			`translate3d(1px, 0px, 0px) scale(${0.6 + Math.min(Math.max(minMb - scroll, 0), minMb) / (2 * minMb)})`
 		);
 		document.documentElement.style.setProperty("--header-height", `${Math.max(maxScrollY, maxHeight)}px`);
 		document.documentElement.style.setProperty("--header-mb", `-${Math.max(maxScrollY - maxHeight + minMb, minMb)}px`);
@@ -170,7 +169,6 @@ function Nav({ pages }: NavData) {
 												alt="Profile picture"
 												className="rounded-full bg-zinc-100 object-cover  h-16 w-16"
 											/>
-											{loading && <UserSkeleton className="h-16 w-16" iconSize="8x" />}
 										</button>
 									</div>
 								</div>
