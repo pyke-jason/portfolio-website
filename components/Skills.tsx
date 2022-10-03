@@ -9,17 +9,17 @@ interface SkillData {
 function SkillEntry({ title, skills: children }: SkillData) {
 	return (
 		<>
-			<div className="space-y-5 mb-5">
+			<div className="space-y-5 mb-8">
 				<h2 className="text-lg font-medium">{title}</h2>
-				<div className="flex flex-wrap space-x-4">{children && children.map((v, i) => <p key={i}>{v}</p>)}</div>
+				<div className="flex flex-wrap space-x-5">{children && children.map((v, i) => <p className="text-base text-zinc-500" key={i}>{v}</p>)}</div>
 			</div>
 		</>
 	);
 }
-export default function Skills({ data, onBecameActive }: PageProps) {
+export default function Skills({ data }: PageProps) {
 	return (
 		<>
-			<TitledSection onBecameActive={onBecameActive} data={data} title="Skills">
+			<TitledSection data={data}>
 				<div>
 					<SkillEntry
 						title={"Programming Languages (proficient)"}
@@ -51,7 +51,7 @@ export default function Skills({ data, onBecameActive }: PageProps) {
 							"Visual Studio",
 							"Visual Studio Code",
 							"PyCharm",
-                            "Android Studio",
+							"Android Studio",
 							"Amazon EMR",
 							"Package Managers (npm, yarn)",
 							"MongoDB Compass",
@@ -59,7 +59,7 @@ export default function Skills({ data, onBecameActive }: PageProps) {
 							"Azure DevOps",
 							"Confluence",
 							"Postman",
-                            "Tableau",
+							"Tableau",
 							"Blender",
 						]}
 					/>
@@ -70,11 +70,11 @@ export default function Skills({ data, onBecameActive }: PageProps) {
 							"RESTful API Design",
 							"MVC architecture",
 							"Separation of Concerns & Cohesion",
-                            "Parallelism, Fault Tolerance, Data Distribution, Load Balancing",
+							"Parallelism, Fault Tolerance, Data Distribution, Load Balancing",
 							"Agile Development Methodology",
-                            "Systems Development Lifecycle (Waterfall)",
-                            "Rapid Application Development",
-                            "Lean Methodology",
+							"Systems Development Lifecycle (Waterfall)",
+							"Rapid Application Development",
+							"Lean Methodology",
 						]}
 					/>
 					<SkillEntry

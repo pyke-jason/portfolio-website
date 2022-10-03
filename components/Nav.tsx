@@ -1,117 +1,222 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import Image from "next/image";
-import { PageDictionary } from "interfaces/PageDictionary";
-import { SectionAssignment } from "pages/index";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faCheck } from "@fortawesome/free-solid-svg-icons";
-import { PageData } from "interfaces/PageData";
+import { ActiveSectionContext, ActiveSectionDispatchContext } from "pages/index";
+
 import UserSkeleton from "./UserSkeleton";
+import { useScrollPosition } from "@n8tb1t/use-scroll-position";
+import { PageData } from "interfaces/PageData";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { Dialog, Menu, Transition } from "@headlessui/react";
 
 interface MenuItemData {
 	page: PageData;
-	className?: string;
 	active?: boolean;
 	children?: React.ReactNode;
-	selectActive?: SectionAssignment;
+	selectActive?: any;
 }
-function MenuItem({ page, className, selectActive, active }: MenuItemData) {
+interface MobileMenuProps {
+	isOpen: boolean;
+	selectActive: any;
+	activeSection: PageData;
+	pages: PageData[];
+}
+
+function MobileDropdown({ isOpen, pages, selectActive, activeSection }: MobileMenuProps) {
+	console.log(selectActive);
+	function MobileMenuItem({ page, active, selectActive }: MenuItemData) {
+		return (
+			<Menu.Item>
+				<button
+					onClick={() => selectActive(page)}
+					className={`${
+						active ? "text-teal-500 dark:text-teal-400" : ""
+					} text-zinc-800 relative block text-left px-4 py-4 transition hover:text-teal-500 dark:hover:text-teal-400 w-full`}
+				>
+					{page.title}
+				</button>
+			</Menu.Item>
+		);
+	}
 	return (
-		<li className={className}>
+		<Menu as="div" className="pointer-events-auto md:hidden relative inline-block text-left">
+			<div>
+				<Menu.Button className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
+					{activeSection.title}
+					<ChevronDownIcon className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100" aria-hidden="true" />
+				</Menu.Button>
+			</div>
+			<Transition
+				as={Fragment}
+				enter="transition ease-out duration-100"
+				enterFrom="transform opacity-0 scale-95"
+				enterTo="transform opacity-100 scale-100"
+				leave="transition ease-in duration-75"
+				leaveFrom="transform opacity-100 scale-100"
+				leaveTo="transform opacity-0 scale-95"
+			>
+				<Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+					<div className="px-1 py-1 ">
+						{pages.map(
+							(x, i) =>
+								i > 0 && <MobileMenuItem key={i} page={x} active={activeSection.id === x.id} selectActive={selectActive} />
+						)}
+					</div>
+				</Menu.Items>
+			</Transition>
+		</Menu>
+	);
+}
+
+function MenuItem({ page, active, selectActive }: MenuItemData) {
+	return (
+		<li>
 			<button
 				onClick={() => {
 					selectActive && selectActive(page);
 				}}
 				className={`${
-					active ? "border-stone-300 scale-105" : "border-white"
-				} text-stone-800 border-b-2 transition-all hover:border-stone-300 pb-1 text-lg`}
+					active ? "text-teal-500 dark:text-teal-400" : ""
+				} relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400`}
 			>
 				{page.title}
+				{active && (
+					<span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-teal-500/0 via-teal-500/40 to-teal-500/0 dark:from-teal-400/0 dark:via-teal-400/40 dark:to-teal-400/0"></span>
+				)}
 			</button>
 		</li>
 	);
 }
 
-function SmallMenuItem({ page, className, children, selectActive }: MenuItemData) {
-	return (
-		<button
-			className={className}
-			onClick={() => {
-				selectActive && selectActive(page);
-			}}
-		>
-			{page.title}
-			{children}
-		</button>
-	);
+let maxScrollY = 0;
+
+interface NavData {
+	pages: PageData[];
 }
 
-interface NavData extends PageDictionary {
-	activeSection?: any;
-	selectActive: SectionAssignment;
-}
-
-function Nav({ pages, activeSection, selectActive }: NavData) {
+function Nav({ pages }: NavData) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [atTop, setAtTop] = useState(true);
 	const [loading, setLoading] = useState(true);
+	const maxHeight = 200;
+	const navHeight = 64;
+	const minMb = maxHeight - navHeight;
+	const activeSection: PageData = useContext(ActiveSectionContext);
+	const dispatch = useContext(ActiveSectionDispatchContext);
+
+	function selectActive(page: PageData) {
+		if (page !== undefined) {
+			maxScrollY = Infinity;
+			dispatch({ type: "select", page: page });
+		}
+		if (isOpen) {
+			setIsOpen(false);
+		}
+	}
+	useScrollPosition(({ prevPos, currPos }) => {
+		updateScroll(-currPos.y, Math.min(-currPos.y, maxHeight));
+	});
 
 	useEffect(() => {
-		window.onscroll = function () {
-			if (window.scrollY == 0) {
-				setAtTop(true);
-			} else {
-				setAtTop(false);
-			}
-		};
+		updateScroll(0, 0);
 	}, []);
-	return (
-		<nav
-			className={`${isOpen ? "max-h-96" : "max-h-20"} ${
-				atTop ? "" : ""
-			} border-b md:max-h-full transition-all md:transition-none bg-white sticky z-50 top-0 md:w-72 md:h-screen md:border-r overflow-hidden flex md:text-center md:items-center`}
-		>
-			<div id="mobile-menu" className="md:hidden w-full">
-				{pages.map((page, i) => {
-					const isActive = activeSection.id === page.id;
-					return (
-						(isOpen || isActive) && (
-							<SmallMenuItem
-								className={`${isActive && isOpen ? "bg-stone-200" : ""} w-full block px-10 py-5 text-base`}
-								page={page}
-								key={i}
-								selectActive={(page) => {
-									if (isOpen) {
-										selectActive(page);
-										setIsOpen(false);
-									} else {
-										setIsOpen(true);
-									}
-								}}
-							>
-								{!isOpen && isActive && <FontAwesomeIcon color="gray" className="ml-4" icon={faChevronDown} />}
-							</SmallMenuItem>
-						)
-					);
-				})}
-			</div>
+	function updateScroll(scroll: number, amount: number) {
+		if (scroll > maxScrollY) {
+			if (scroll - maxScrollY > navHeight) {
+				maxScrollY = scroll - navHeight;
+			}
+		} else {
+			if (maxScrollY - scroll > navHeight) {
+				maxScrollY = scroll + navHeight;
+			}
+		}
 
-			<div className="hidden md:block ml-auto mr-auto xl:mr-12">
-				<button
-					onClick={() => selectActive(pages[0])}
-					className={`${
-						activeSection.id == pages[0].id ? "scale-105" : ""
-					} overflow-hidden lg:w-36 lg:h-36 w-32 h-32 box-content transition-all relative rounded-full hidden md:block mb-8 hover:brightness-90`}
-				>
-					<Image onLoadingComplete={() => setLoading(false)} src="/images/headshot.JPG" layout="fill" objectFit="cover" alt="Profile picture" />
-					{loading && <UserSkeleton className="w-full h-full" iconSize="8x" />}
-				</button>
-				<ul className="space-y-6">
-					{pages.map(
-						(x, i) => i != 0 && <MenuItem key={i} page={x} active={activeSection.id === x.id} selectActive={selectActive} />
-					)}
-				</ul>
-			</div>
-		</nav>
+		document.documentElement.style.setProperty(
+			"--avatar-image-transform",
+			`translate3d(1px, 0px, 0px) scale(${0.6 + Math.min(Math.max(minMb - scroll, 0), minMb) / (1 * minMb)})`
+		);
+		document.documentElement.style.setProperty("--header-height", `${Math.max(maxScrollY, maxHeight)}px`);
+		document.documentElement.style.setProperty("--header-mb", `-${Math.max(maxScrollY - maxHeight + minMb, minMb)}px`);
+		document.documentElement.style.setProperty("--content-offset", `${minMb}px`);
+	}
+
+	return (
+		<>
+			<header
+				className="pointer-events-none relative z-40 flex flex-col mx-auto"
+				style={{ height: "var(--header-height)", marginBottom: "var(--header-mb)" }}
+			>
+				<div className="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]"></div>
+				<div className="sm:px-8 top-0 order-last -mb-3 pt-3 sticky">
+					<div className="mx-auto max-w-7xl lg:px-8">
+						<div className="relative px-4 sm:px-8 lg:px-12">
+							<div className="mx-auto max-w-2xl lg:max-w-5xl">
+								<div className="top-[var(--avatar-top,theme(spacing.3))] w-full sticky" /* ?? */>
+									<div className="relative">
+										<div
+											className="absolute left-0 top-3 origin-left transition-opacity h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10"
+											></div>
+										<button
+											aria-label="Home"
+											style={{ transform: "var(--avatar-image-transform)" }}
+											onClick={() => selectActive(pages[0])}
+											className={"block h-16 w-16 origin-left pointer-events-auto"}
+										>
+											<Image
+												sizes="4rem"
+												onLoadingComplete={() => setLoading(false)}
+												src="/images/headshot.JPG"
+												width={"256px"}
+												height={"256px"}
+												alt="Profile picture"
+												className="rounded-full bg-zinc-100 object-cover dark:bg-zinc-800 h-16 w-16"
+											/>
+											{loading && <UserSkeleton className="h-16 w-16" iconSize="8x" />}
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className="top-0 z-10 h-16 pt-6 sticky">
+					<div className="sm:px-8 top-[var(--header-top,theme(spacing.6))] w-full sticky">
+						<div className="mx-auto max-w-7xl lg:px-8">
+							<div className="relative px-4 sm:px-8 lg:px-12">
+								<div className="mx-auto max-w-2xl lg:max-w-5xl">
+									<div className="relative gap-4">
+										<div className="flex flex-1"></div>
+										<div className="flex flex-0 justify-end md:justify-center">
+											<MobileDropdown
+												pages={pages}
+												activeSection={activeSection}
+												isOpen={isOpen}
+												selectActive={selectActive}
+											/>
+											<nav className="pointer-events-auto hidden md:block">
+												<ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
+													{pages.map(
+														(x, i) =>
+															i > 0 && (
+																<MenuItem
+																	key={i}
+																	page={x}
+																	active={activeSection.id === x.id}
+																	selectActive={selectActive}
+																/>
+															)
+													)}
+												</ul>
+											</nav>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			<div style={{ height: "var(--content-offset)" }}></div>
+		</>
 	);
 }
 

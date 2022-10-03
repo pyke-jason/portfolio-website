@@ -1,6 +1,5 @@
 import { PageData } from "./PageData";
 
-export default interface PageProps extends React.HTMLAttributes<HTMLElement>  {
-    data: PageData;
-    onBecameActive: (id: PageData) => void;
+export default interface PageProps extends React.HTMLAttributes<HTMLElement> {
+	data: PageData;
 }
