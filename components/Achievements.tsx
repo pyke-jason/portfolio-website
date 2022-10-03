@@ -5,10 +5,10 @@ import TitledSection from "./TitledSection";
 
 export default function Achievements({ data }: PageProps) {
     return <>
-        <TitledSection data={data} title="Achievements">
+        <TitledSection data={data}>
             <SectionEntry title="Eagle Scout" subtitle="Boy Scouts of America" date="2017" />
             <SectionEntry title="Student Athlete" subtitle="University of Washington" date="Sep. 2018 &ndash; Sep. 2020">
-                <BulletedNote note={"Rowing athlete at National Championship D1 program."} />
+                <BulletedNote className="text-zinc-600" note={"Rowing athlete at National Championship D1 program."} />
             </SectionEntry>
             <SectionEntry title="9x Dean's List Award Recipient" subtitle="University of Washington" date="2018 &ndash; 2022" />
         </TitledSection>

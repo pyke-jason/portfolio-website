@@ -1,12 +1,12 @@
 import PageProps from "interfaces/PageProps";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import Section from "./Section";
-import { UrlObject } from "url";
-import ContactDropdown from "./ContactDropdown";
-import IconLink from "./IconLink";
-import UserSkeleton from "./UserSkeleton";
+import { ArrowDownIcon, EnvelopeIcon, InformationCircleIcon } from "@heroicons/react/24/solid";
+import { faGithub, faGooglePlay, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import IconWithLink from "./IconWithLink";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import DownloadResume from "./DownloadResume";
 
 interface StyledLinkData extends React.HTMLAttributes<HTMLElement> {
 	href: string;
@@ -28,47 +28,57 @@ function TitlePage({ data }: PageProps) {
 	const [loading, setLoading] = useState(true);
 	return (
 		<>
-			<div>
-				<Section
-					className="py-12 px-4 xl:px-20 border-b md:h-screen flex flex-col"
-					data={data}
-				>
-					<div className="text-center md:text-left">
-						<div className={`mx-auto md:hidden mb-20 w-56 h-56 rounded-full border-8 border-slate-100 relative overflow-hidden`}>
-							<Image onLoadingComplete={() => setLoading(false)} src="/images/headshot.JPG" layout="fill" objectFit="cover"  alt="Profile picture"/>
-							{loading && <UserSkeleton className="w-full h-full" iconSize="8x" />}
-						</div>
-						<h1 className="text-5xl font-bold mb-5">Software engineer, game designer, and seattleite.</h1>
-						<p className="text-lg mb-12">Versatile software engineer who is passionate about solving problems and building thoughtful solutions.</p>
-						<StyledLink href="/resume.pdf" className="mb-12">
-							Resume (PDF)
-						</StyledLink>
-						<div className="flex items-center">
-							<IconLink
-								aria-label="LinkedIn URL"
-								circular
-								className="text-5xl"
-								href="https://www.linkedin.com/in/jason-pyke/"
-								name={{ prefix: "fab", iconName: "linkedin" }}
-							/>
-							<IconLink
-								aria-label="Github URL"
-								circular
-								className="text-5xl"
-								href="https://github.com/pyke-jason"
-								name={{ prefix: "fab", iconName: "github" }}
-							/>
-							<IconLink
-								aria-label="Email"
-								circular
-								className="text-5xl"
-								href="mailto:pyke.jason1@gmail.com"
-								name={{ prefix: "fas", iconName: "envelope" }}
-							/>
-						</div>
+			<Section data={data} border>
+				<div className="max-w-2xl">
+					{/* <div className={`mx-auto md:hidden mb-20 w-56 h-56 rounded-full border-8 border-slate-100 relative overflow-hidden`}>
+								<Image onLoadingComplete={() => setLoading(false)} src="/images/headshot.JPG" layout="fill" objectFit="cover"  alt="Profile picture"/>
+								{loading && <UserSkeleton className="w-full h-full" iconSize="8x" />}
+							</div> */}
+					<h1 className="text-5xl font-bold mb-16">Jason Pyke's portfolio website.</h1>
+					<div className="mb-12 text-base text-zinc-600">
+						I'm Jason, a software engineer and game design hobbyist based in Seattle. I'll be graduating from the University of
+						Washington in December with a degree in{" "}
+						<span className="font-bold group hover:text-zinc-500 inline-flex flex-col">
+							<span>
+								Informatics
+								<InformationCircleIcon className="ml-[1px] -mr-1 pb-1 h-6 w-6 inline transition fill-zinc-600 group-hover:fill-zinc-500" />
+							</span>
+							<div
+								role="tooltip"
+								className="absolute hidden group-hover:inline-block z-10 mt-10 text-sm max-w-md p-4 font-normal text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur rounded-xl dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10"
+							>
+								The term “informatics” broadly describes the study, design, and development of information technology for
+								the good of people, organizations, and society. - UW iSchool
+							</div>
+						</span>
+						. I'm very passionate about building thoughftul solutions to modern problems.
 					</div>
-				</Section>
-			</div>
+					<DownloadResume className="w-48" />
+					<div className="flex items-center space-x-6 my-16">
+						<IconWithLink
+							className="h-7 w-7 text-xl text-zinc-500 hover:text-zinc-600"
+							aria-label="LinkedIn URL"
+							href="https://www.linkedin.com/in/jason-pyke/"
+						>
+							<FontAwesomeIcon icon={faLinkedin} />
+						</IconWithLink>
+						<IconWithLink
+							className="h-7 w-7 text-xl text-zinc-500 hover:text-zinc-600"
+							aria-label="Github URL"
+							href="https://github.com/pyke-jason"
+						>
+							<FontAwesomeIcon icon={faGithub} />
+						</IconWithLink>
+						<IconWithLink
+							className="h-6 w-6 text-zinc-500 hover:text-zinc-600"
+							aria-label="Email"
+							href="mailto:pyke.jason1@gmail.com"
+						>
+							<EnvelopeIcon />
+						</IconWithLink>
+					</div>
+				</div>
+			</Section>
 		</>
 	);
 }

@@ -22,3 +22,8 @@
 	background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
+
+
+.text-sm, .text-xs{
+	line-height: 1.5rem;
+}
