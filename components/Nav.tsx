@@ -1,11 +1,11 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import Image from "next/image";
-import { ActiveSectionContext, ActiveSectionDispatchContext } from "pages/index";
+import { ActiveSectionContext, ActiveSectionDispatchContext } from "@components/App";
 
 import { useScrollPosition } from "@n8tb1t/use-scroll-position";
 import { PageData } from "interfaces/PageData";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import { Dialog, Menu, Transition } from "@headlessui/react";
+import { Menu, Transition } from "@headlessui/react";
 
 interface MenuItemData {
 	page: PageData;
@@ -13,29 +13,29 @@ interface MenuItemData {
 	children?: React.ReactNode;
 	selectActive?: any;
 }
-interface MobileMenuProps {
-	isOpen: boolean;
+interface MenuProps {
 	selectActive: any;
-	activeSection: PageData;
 	pages: PageData[];
 }
 
-function MobileDropdown({ isOpen, pages, selectActive, activeSection }: MobileMenuProps) {
-	console.log(selectActive);
-	function MobileMenuItem({ page, active, selectActive }: MenuItemData) {
-		return (
-			<Menu.Item>
-				<button
-					onClick={() => selectActive(page)}
-					className={`${
-						active ? "text-teal-500 " : ""
-					} text-zinc-800 relative block text-left px-4 py-4 transition hover:text-teal-500 :text-teal-400 w-full`}
-				>
-					{page.title}
-				</button>
-			</Menu.Item>
-		);
-	}
+function MobileMenuItem({ page, active, selectActive }: MenuItemData) {
+	return (
+		<Menu.Item>
+			<button
+				onClick={() => selectActive(page)}
+				className={`${
+					active ? "text-teal-500 " : ""
+				} text-zinc-800 relative block text-left px-4 py-4 transition hover:text-teal-500 :text-teal-400 w-full`}
+			>
+				{page.title}
+			</button>
+		</Menu.Item>
+	);
+}
+
+function MobileDropdown({ pages, selectActive }: MenuProps) {
+	const activeSection: PageData = useContext(ActiveSectionContext);
+
 	return (
 		<Menu as="div" className="pointer-events-auto md:hidden relative inline-block text-left">
 			<div>
@@ -73,9 +73,7 @@ function MenuItem({ page, active, selectActive }: MenuItemData) {
 				onClick={() => {
 					selectActive && selectActive(page);
 				}}
-				className={`${
-					active ? "text-teal-500 " : ""
-				} relative block px-3 py-2 transition hover:text-teal-500 :text-teal-400`}
+				className={`${active ? "text-teal-500 " : ""} relative block px-3 py-2 transition hover:text-teal-500 :text-teal-400`}
 			>
 				{page.title}
 				{active && (
@@ -92,23 +90,29 @@ interface NavData {
 	pages: PageData[];
 }
 
+function TopBarComponents({ pages, selectActive }: MenuProps) {
+	const activeSection: PageData = useContext(ActiveSectionContext);
+
+	return (
+		<>
+			{pages.map(
+				(x: PageData, i: React.Key) =>
+					i > 0 && <MenuItem key={i} page={x} active={activeSection.id === x.id} selectActive={selectActive} />
+			)}
+		</>
+	);
+}
+
 function Nav({ pages }: NavData) {
-	const [isOpen, setIsOpen] = useState(false);
-	const [atTop, setAtTop] = useState(true);
-	const [loading, setLoading] = useState(true);
 	const maxHeight = 180;
 	const navHeight = 64;
 	const minMb = maxHeight - navHeight;
-	const activeSection: PageData = useContext(ActiveSectionContext);
 	const dispatch = useContext(ActiveSectionDispatchContext);
 
 	function selectActive(page: PageData) {
 		if (page !== undefined) {
 			maxScrollY = Infinity;
 			dispatch({ type: "select", page: page });
-		}
-		if (isOpen) {
-			setIsOpen(false);
 		}
 	}
 	useScrollPosition(({ prevPos, currPos }) => {
@@ -118,6 +122,7 @@ function Nav({ pages }: NavData) {
 	useEffect(() => {
 		updateScroll(0, 0);
 	}, []);
+
 	function updateScroll(scroll: number, amount: number) {
 		if (scroll > maxScrollY) {
 			if (scroll - maxScrollY > navHeight) {
@@ -128,7 +133,7 @@ function Nav({ pages }: NavData) {
 				maxScrollY = scroll + navHeight;
 			}
 		}
-		
+
 		document.documentElement.style.setProperty(
 			"--avatar-image-transform",
 			`translate3d(1px, 0px, 0px) scale(${0.6 + Math.min(Math.max(minMb - scroll, 0), minMb) / (2 * minMb)})`
@@ -151,9 +156,7 @@ function Nav({ pages }: NavData) {
 							<div className="mx-auto max-w-2xl lg:max-w-5xl">
 								<div className="top-[var(--avatar-top,theme(spacing.3))] w-full sticky" /* ?? */>
 									<div className="relative">
-										<div
-											className="absolute left-0 top-3 origin-left transition-opacity h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur  "
-											></div>
+										<div className="absolute left-0 top-3 origin-left transition-opacity h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur  "></div>
 										<button
 											aria-label="Home"
 											style={{ transform: "var(--avatar-image-transform)" }}
@@ -162,7 +165,6 @@ function Nav({ pages }: NavData) {
 										>
 											<Image
 												sizes="4rem"
-												onLoadingComplete={() => setLoading(false)}
 												src="/images/headshot.JPG"
 												width={"256px"}
 												height={"256px"}
@@ -184,25 +186,10 @@ function Nav({ pages }: NavData) {
 									<div className="relative gap-4">
 										<div className="flex flex-1"></div>
 										<div className="flex flex-0 justify-end md:justify-center">
-											<MobileDropdown
-												pages={pages}
-												activeSection={activeSection}
-												isOpen={isOpen}
-												selectActive={selectActive}
-											/>
+											<MobileDropdown pages={pages} selectActive={selectActive} />
 											<nav className="pointer-events-auto hidden md:block">
 												<ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur   ">
-													{pages.map(
-														(x, i) =>
-															i > 0 && (
-																<MenuItem
-																	key={i}
-																	page={x}
-																	active={activeSection.id === x.id}
-																	selectActive={selectActive}
-																/>
-															)
-													)}
+													<TopBarComponents pages={pages} selectActive={selectActive} />
 												</ul>
 											</nav>
 										</div>
