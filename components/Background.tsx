@@ -23,7 +23,7 @@ function WorkItem({ company, title, time, src, children, ...rest }: WorkItemProp
 					<div className="group">
 						<Disclosure.Button className="text-left justify-between flex gap-4 items-center w-full p-3 hover:bg-zinc-50 rounded-2xl">
 							<div className="flex flex-auto gap-4">
-								<div className="relative my-auto flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+								<div className="relative my-auto flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5    ">
 									<Image
 										alt=""
 										src={src}
@@ -39,9 +39,9 @@ function WorkItem({ company, title, time, src, children, ...rest }: WorkItemProp
 									<div className="flex flex-auto">
 										<dl className="flex flex-col md:flex-row flex-wrap gap-x-2 space-y-1">
 											<dt className="sr-only">Company</dt>
-											<dd className="w-full text-sm font-medium text-zinc-900 dark:text-zinc-100">{company}</dd>
+											<dd className="w-full text-sm font-medium text-zinc-900 ">{company}</dd>
 											<dt className="sr-only">Role</dt>
-											<dd className="text-sm text-zinc-500 dark:text-zinc-400">{title}</dd>
+											<dd className="text-sm text-zinc-500 ">{title}</dd>
 										</dl>
 									</div>
 									<div className="my-auto">
@@ -67,11 +67,11 @@ function WorkItem({ company, title, time, src, children, ...rest }: WorkItemProp
 }
 
 function BackgroundTable() {
-	const iconStyle = "h-6 w-6 flex-none fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500";
+	const iconStyle = "h-6 w-6 flex-none fill-zinc-100 stroke-zinc-400  ";
 
 	function CellTitle({ title, icon }: any) {
 		return (
-			<h2 className="flex text-sm font-semibold pt-3 px-3 text-zinc-900 dark:text-zinc-100 border-zinc-800/5">
+			<h2 className="flex text-sm font-semibold pt-3 px-3 text-zinc-900  border-zinc-800/5">
 				{icon}
 
 				<span className="ml-3">{title}</span>
@@ -86,7 +86,7 @@ function BackgroundTable() {
 					company="University of Washington"
 					title={"Seattle, WA"}
 					time={
-						<dd className="sm:text-right w-28 text-xs text-zinc-400 dark:text-zinc-500" aria-label="2018 until 2022">
+						<dd className="sm:text-right w-28 text-xs text-zinc-400 " aria-label="2018 until 2022">
 							<time dateTime="2018">2018</time>
 							<span aria-hidden="true"> — </span>
 							<time dateTime="2022">2022</time>
@@ -118,7 +118,7 @@ function BackgroundTable() {
 					title={"Software Engineer, Intern"}
 					className=""
 					time={
-						<dd className="sm:text-right w-28 text-xs text-zinc-400 dark:text-zinc-500" aria-label="2022 until Present">
+						<dd className="sm:text-right w-28 text-xs text-zinc-400 " aria-label="2022 until Present">
 							<time dateTime="2022">2022</time>
 							<span aria-hidden="true"> — </span>
 							<time dateTime="2022">Present</time>
@@ -140,7 +140,7 @@ function BackgroundTable() {
 					company="Seattle Children's"
 					title={"Student Researcher, Software Developer"}
 					time={
-						<dd className="sm:text-right w-28 text-xs text-zinc-400 dark:text-zinc-500" aria-label="2021 until 2022">
+						<dd className="sm:text-right w-28 text-xs text-zinc-400 " aria-label="2021 until 2022">
 							<time dateTime="2021">2021</time>
 							<span aria-hidden="true"> — </span>
 							<time dateTime="2022">2022</time>
@@ -171,10 +171,10 @@ export default function Experience({ data }: PageProps) {
 			<TitledSection data={data}>
 				<div className="flex flex-col xl:flex-row gap-16">
 					<div className="flex-auto max-w-2xl">
-						<h2 className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+						<h2 className="text-base font-semibold tracking-tight text-zinc-800 ">
 							Born and raised in the greater Seattle area, I started programming when I was 13...
 						</h2>
-						<p className="relative z-10 mt-8 text-sm text-zinc-600 dark:text-zinc-400">
+						<p className="relative z-10 mt-8 text-sm text-zinc-600 ">
 							... thanks to my burning desire to have my own custom Minecraft plugins. Since then, I've been applying my
 							learning and problem solving skills to tackle software development challenges in coursework, projects, and my
 							professional career.

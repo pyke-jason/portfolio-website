@@ -29,8 +29,8 @@ function MobileDropdown({ isOpen, pages, selectActive, activeSection }: MobileMe
 				<button
 					onClick={() => selectActive(page)}
 					className={`${
-						active ? "text-teal-500 dark:text-teal-400" : ""
-					} text-zinc-800 relative block text-left px-4 py-4 transition hover:text-teal-500 dark:hover:text-teal-400 w-full`}
+						active ? "text-teal-500 " : ""
+					} text-zinc-800 relative block text-left px-4 py-4 transition hover:text-teal-500 :text-teal-400 w-full`}
 				>
 					{page.title}
 				</button>
@@ -40,7 +40,7 @@ function MobileDropdown({ isOpen, pages, selectActive, activeSection }: MobileMe
 	return (
 		<Menu as="div" className="pointer-events-auto md:hidden relative inline-block text-left">
 			<div>
-				<Menu.Button className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
+				<Menu.Button className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur    :ring-white/20">
 					{activeSection.title}
 					<ChevronDownIcon className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100" aria-hidden="true" />
 				</Menu.Button>
@@ -75,12 +75,12 @@ function MenuItem({ page, active, selectActive }: MenuItemData) {
 					selectActive && selectActive(page);
 				}}
 				className={`${
-					active ? "text-teal-500 dark:text-teal-400" : ""
-				} relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400`}
+					active ? "text-teal-500 " : ""
+				} relative block px-3 py-2 transition hover:text-teal-500 :text-teal-400`}
 			>
 				{page.title}
 				{active && (
-					<span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-teal-500/0 via-teal-500/40 to-teal-500/0 dark:from-teal-400/0 dark:via-teal-400/40 dark:to-teal-400/0"></span>
+					<span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-teal-500/0 via-teal-500/40 to-teal-500/0   "></span>
 				)}
 			</button>
 		</li>
@@ -153,7 +153,7 @@ function Nav({ pages }: NavData) {
 								<div className="top-[var(--avatar-top,theme(spacing.3))] w-full sticky" /* ?? */>
 									<div className="relative">
 										<div
-											className="absolute left-0 top-3 origin-left transition-opacity h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10"
+											className="absolute left-0 top-3 origin-left transition-opacity h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur  "
 											></div>
 										<button
 											aria-label="Home"
@@ -168,7 +168,7 @@ function Nav({ pages }: NavData) {
 												width={"256px"}
 												height={"256px"}
 												alt="Profile picture"
-												className="rounded-full bg-zinc-100 object-cover dark:bg-zinc-800 h-16 w-16"
+												className="rounded-full bg-zinc-100 object-cover  h-16 w-16"
 											/>
 											{loading && <UserSkeleton className="h-16 w-16" iconSize="8x" />}
 										</button>
@@ -193,7 +193,7 @@ function Nav({ pages }: NavData) {
 												selectActive={selectActive}
 											/>
 											<nav className="pointer-events-auto hidden md:block">
-												<ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
+												<ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur   ">
 													{pages.map(
 														(x, i) =>
 															i > 0 && (

@@ -8,7 +8,7 @@ interface TitledSection extends SectionData {
 function TitledSection({ children, data, ...attributes }: TitledSection) {
 	return (
 		<Section className="py-16" {...attributes} data={data}>
-			<h1 className="text-2xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">{data.title}</h1>
+			<h1 className="text-2xl font-bold tracking-tight text-zinc-800  sm:text-5xl">{data.title}</h1>
 			{children}
 		</Section>
 	);

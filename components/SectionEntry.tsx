@@ -43,7 +43,7 @@ function SectionEntry({ title, subtitle, date, githubUrl, genericLink, googlePla
 							<IconWithLink
 								href={googlePlay}
 								aria-label="Google Play URL"
-								className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition hover:text-teal-500 dark:text-zinc-200"
+								className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition hover:text-teal-500 "
 							>
 								<FontAwesomeIcon className="flex-none my-auto h-4 w-4" icon={faGooglePlay} />
 								<span className="ml-4">play.google.com</span>
@@ -53,7 +53,7 @@ function SectionEntry({ title, subtitle, date, githubUrl, genericLink, googlePla
 							<IconWithLink
 								href={githubUrl}
 								aria-label="Project Github URL"
-								className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition hover:text-teal-500 dark:text-zinc-200"
+								className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition hover:text-teal-500 "
 							>
 								<FontAwesomeIcon className="flex-none my-auto h-4 w-4" icon={faGithub} />
 								<span className="ml-4">github.com</span>
@@ -63,7 +63,7 @@ function SectionEntry({ title, subtitle, date, githubUrl, genericLink, googlePla
 							<IconWithLink
 								href={genericLink}
 								aria-label="Project Website"
-								className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition hover:text-teal-500 dark:text-zinc-200"
+								className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition hover:text-teal-500 "
 							>
 								<LinkIcon className="flex-none my-auto h-4 w-4" />
 								<span className="ml-4">{getHostnameFromRegex(genericLink)}</span>

@@ -45,7 +45,7 @@ function TitlePage({ data }: PageProps) {
 							</span>
 							<div
 								role="tooltip"
-								className="absolute hidden group-hover:inline-block z-10 mt-10 text-sm max-w-md p-4 font-normal text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur rounded-xl dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10"
+								className="absolute hidden group-hover:inline-block z-10 mt-10 text-sm max-w-md p-4 font-normal text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur rounded-xl   "
 							>
 								The term “informatics” broadly describes the study, design, and development of information technology for
 								the good of people, organizations, and society. - UW iSchool
