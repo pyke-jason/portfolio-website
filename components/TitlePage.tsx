@@ -30,11 +30,7 @@ function TitlePage({ data }: PageProps) {
 		<>
 			<Section data={data} border>
 				<div className="max-w-2xl">
-					{/* <div className={`mx-auto md:hidden mb-20 w-56 h-56 rounded-full border-8 border-slate-100 relative overflow-hidden`}>
-								<Image onLoadingComplete={() => setLoading(false)} src="/images/headshot.JPG" layout="fill" objectFit="cover"  alt="Profile picture"/>
-								{loading && <UserSkeleton className="w-full h-full" iconSize="8x" />}
-							</div> */}
-					<h1 className="text-5xl font-bold mb-16">Jason Pyke's portfolio website.</h1>
+					<h1 className="text-5xl font-bold mb-16">Jason Pyke</h1>
 					<div className="mb-12 text-base text-zinc-600">
 						I'm Jason, a software engineer and game design hobbyist based in Seattle. I'll be graduating from the University of
 						Washington in December with a degree in{" "}

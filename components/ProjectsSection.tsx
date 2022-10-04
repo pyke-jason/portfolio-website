@@ -3,7 +3,7 @@ import TitledSection from "./TitledSection";
 import SectionEntry from "./SectionEntry";
 import BulletedNotes from "./BulletedNotes";
 
-export default function Projects({ data }: PageProps) {
+export default function ProjectsSection({ data }: PageProps) {
 	return (
 		<>
 			<TitledSection data={data} title="Projects">

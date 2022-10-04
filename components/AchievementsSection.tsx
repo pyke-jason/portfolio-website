@@ -3,7 +3,7 @@ import BulletedNotes, { BulletedNote } from "./BulletedNotes";
 import SectionEntry from "./SectionEntry";
 import TitledSection from "./TitledSection";
 
-export default function Achievements({ data }: PageProps) {
+export default function AchievementsSection({ data }: PageProps) {
     return <>
         <TitledSection data={data}>
             <SectionEntry title="Eagle Scout" subtitle="Boy Scouts of America" date="2017" />
