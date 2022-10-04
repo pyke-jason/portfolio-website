@@ -161,7 +161,7 @@ function Nav({ pages }: NavData) {
 											aria-label="Home"
 											style={{ transform: "var(--avatar-image-transform)" }}
 											onClick={() => selectActive(pages[0])}
-											className={"block h-16 w-16 origin-left pointer-events-auto"}
+											className={"block h-16 w-16 origin-left pointer-events-auto will-change-transform"}
 										>
 											<Image
 												sizes="4rem"
