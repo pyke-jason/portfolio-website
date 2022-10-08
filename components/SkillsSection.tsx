@@ -23,9 +23,9 @@ export default function Skills({ data }: PageProps) {
 				<div>
 					<SkillEntry
 						title={"Programming Languages (proficient)"}
-						skills={["C#", "Python", "C", "TypeScript", "JavaScript", "Java", "SQL"]}
+						skills={["C#", "Java", "Python", "TypeScript", "JavaScript", "SQL"]}
 					/>
-					<SkillEntry title={"Programming Languages (familiar)"} skills={["C++", "HTML/CSS", "GO", "Dart", "R"]} />
+					<SkillEntry title={"Programming Languages (familiar)"} skills={["C", "C++", "HTML/CSS", "GO", "Dart", "R"]} />
 					<SkillEntry
 						title={"Frameworks & Libraries"}
 						skills={[
