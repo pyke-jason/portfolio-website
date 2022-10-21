@@ -47,7 +47,7 @@ function TitlePage({ data }: PageProps) {
 								the good of people, organizations, and society. - UW iSchool
 							</div>
 						</span>
-						. I'm very passionate about building thoughftul solutions to modern problems.
+						. I'm very passionate about building thoughtful solutions to modern problems.
 					</div>
 					<DownloadResume className="w-48" />
 					<div className="flex items-center space-x-6 my-16">
